@@ -41,7 +41,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-sm bg-primary navbar-dark">
+      <nav className="navbar navbar-expand-sm bg-success navbar-dark">
         <button
           className="navbar-toggler"
           type="button"
@@ -88,6 +88,11 @@ class Navbar extends React.Component {
                     <a className="nav-link">Finance</a>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/Berita" className="card-link">
+                    <a className="nav-link">Berita</a>
+                  </Link>
+                </li>
 
                 <li className="nav-item">
                   <button className="btn btn-success">
@@ -110,12 +115,6 @@ class Navbar extends React.Component {
                 </li>
               </React.Fragment>
             )}
-
-            {/* <li className="nav-item">
-              <Link to="/Berita" className="card-link">
-                <a className="nav-link">Berita</a>
-              </Link>
-            </li> */}
           </ul>
         </div>
       </nav>

@@ -17,7 +17,7 @@ export const registerusers = (userData, history) => {
 // Register burung
 export const registerburung = (burungData, history) => {
   axios
-    .post("/api/burung/add", burungData)
+    .post("http://localhost:5000/api/burung/add", burungData)
     .then(res => res.status(200).json(res.data))
     .catch(err => {
       return err;
@@ -70,10 +70,9 @@ export const addPost = (postData, config) => {
 };
 
 export const getBurung = () => {
-  axios
-    .get("/api/burung/getburung")
-    .then(res => {
-      return res;
+  fetch('http://localhost:5000/api/burung/getburung')
+      .then((res) => {
+      return res.data;
     })
     .catch(err => {
       return err;

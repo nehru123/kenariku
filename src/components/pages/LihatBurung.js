@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import api from '../utils/ServicesBurung';
 
 const Container = styled.nav`
   max-width: 100%;
@@ -24,8 +25,27 @@ const Container = styled.nav`
   }
 `;
 
+
+
+
 export default class LihatBurung extends Component {
+  state = {
+    path: "http://localhost:5000/img/",
+    data: []
+  };
+
+  componentDidMount = async () => {
+    var query = window.location.search.substring(1);
+     await api.getBirdById(query).then(bird => {
+       console.log(bird)
+      this.setState({
+        data: bird.data
+      })
+    })
+  }
   render() {
+    const { data } = this.state;
+    const stat = ["Terjual", "Stok"];
     return (
       <Container>
         <div classNameName="wrapper">
@@ -34,40 +54,31 @@ export default class LihatBurung extends Component {
               <div style={{ marginLeft: 50 }} className="col-md-5">
                 <Carousel showStatus={false} width="350px">
                   <div>
-                    <img src="https://omkicau.com/wp-content/uploads/2013/04/american-singer-canary.jpg?w=300" />
+                    <img src={this.state.path+data.image1} alt="Depan" />
                   </div>
                   <div>
-                    <img src="https://omkicau.com/wp-content/uploads/2013/04/american-singer-canary.jpg?w=300" />
+                    <img src={this.state.path+data.image2} alt="Samping" />
                   </div>
                   <div>
-                    <img src="https://omkicau.com/wp-content/uploads/2013/04/american-singer-canary.jpg?w=300" />
+                    <img src={this.state.path+data.image3} alt="Belakang" />
                   </div>
                 </Carousel>
               </div>
               <div className="col-md-5">
                 <div className="card-body">
-                  <h1 className="card-title">Kenari Loper </h1>
+                  <h1 className="card-title">{data.name} {stat[data.status]}</h1>
 
                   <hr></hr>
                   <p className="card-text">
-                    1.8 – 2.0 kg Dipelihara hanya dengan menggunakan pakan
-                    <br></br>
-                    individu dan program manajemen ternak eksklusif kami
-                    <br></br>
-                    ayam pedaging kami terkenal memiliki kualitas<br></br>
-                    berat dan ukuran yang seragam, serta hasil karkas yang
-                    <br></br>
-                    terjamin kualitas dan kesegarannya, cocok untuk segala jenis
-                    <br></br>
-                    masakan
+                    {data.deskripsi}
                   </p>
-                  <p>Jenis :Lovebird</p>
+                  <p>Jenis :{data.jenis}</p>
                   <hr></hr>
-                  <p>Umur : 6 bulan</p>
+                  <p>Umur : {data.umur}</p>
                   <hr></hr>
-                  <p>Warna : Biru</p>
+                  <p>Warna : {data.warna}</p>
                   <hr></hr>
-                  <p>Jenis kelamin : Jantan</p>
+                  <p>Jenis kelamin : {data.jenis_kelamin}</p>
                   <hr></hr>
                   <p className="card-text">
                     <small className="text-muted">

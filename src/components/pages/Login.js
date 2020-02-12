@@ -46,6 +46,7 @@ class Login extends Component {
   };
 
   onSubmit(e) {
+    alert("Login Berhasil");
     e.preventDefault();
     const userData = {
       email: this.state.email,
@@ -59,6 +60,19 @@ class Login extends Component {
     this.setState({
       [target.name]: target.value
     });
+  }
+  // logged in and error handling
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/home");
+    }
+  }
+
+  // handle if user logged in yet try to direct to auth pages
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/home");
+    }
   }
 
   render() {

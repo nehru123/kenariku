@@ -14,6 +14,7 @@ import LihatBurung from "./components/pages/LihatBurung";
 import Report from "./components/pages/Report";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import Berita from "./components/pages/Berita";
 import LaporanKeuangan from "./components/pages/LaporanKeuangan";
 
 // utils
@@ -61,6 +62,7 @@ class App extends React.Component {
               <Route exact path="/Galery" component={Galery} />
               <Route exact path="/lihat" component={LihatBurung} />
               <Route exact path="/Report" component={Report} />
+              <Route exact path="/Berita" component={Berita} />
 
               <Route exact path="/Register" component={Register} />
               <Route
