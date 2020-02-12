@@ -41,7 +41,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-sm bg-success navbar-dark">
+      <nav className="navbar navbar-expand-sm bg-primary navbar-dark">
         <button
           className="navbar-toggler"
           type="button"
@@ -95,7 +95,10 @@ class Navbar extends React.Component {
                 </li>
 
                 <li className="nav-item">
-                  <button className="btn btn-success">
+                  <button
+                    className="btn"
+                    style={{ backgroundColor: "transparent", color: "white" }}
+                  >
                     <i
                       className="fa fa-sign-out  "
                       onClick={() => this.onClickLogout()}
@@ -106,7 +109,10 @@ class Navbar extends React.Component {
             ) : (
               <React.Fragment>
                 <li className="nav-item">
-                  <button className="btn btn-success">
+                  <button
+                    className="btn"
+                    style={{ backgroundColor: "transparent", color: "white" }}
+                  >
                     <i
                       className="fa fa-sign-in  "
                       onClick={() => this.onClickLogout()}
