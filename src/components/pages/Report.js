@@ -170,7 +170,7 @@ export default class Report extends Component {
   };
   deleteData = async e => {
     e.preventDefault();
-    await api.deleteBirdById(this.state.idUp).then(res => {
+    await api.deleteReportById(this.state.idUp).then(res => {
       window.alert(`Bird deleted successfully`);
       this.getReportFromDb();
     });
@@ -233,7 +233,7 @@ export default class Report extends Component {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
-                      Tambah Log
+                      Update
                     </h5>
                     <button
                       type="button"
@@ -401,6 +401,221 @@ export default class Report extends Component {
                             <td>{fil.log}</td>
                             <td>{fil.pakan}</td>
                             <td>{fil.status}</td>
+                            <td>
+                              <button
+                                type="button"
+                                className="btn btn-success"
+                                data-toggle="modal"
+                                data-target="#updateReport"
+                                onClick={e => this.setState({
+                                  namaUp:fil.nama,
+                                  tanggalUp:fil.tanggal,
+                                  jamUp:fil.jam,
+                                  logUp:fil.log,
+                                  pakanUp:fil.pakan,
+                                  statusUp:fil.status
+                                
+                                })}
+                              >
+                                Edit Log
+                              </button>
+                              <div
+              className="modal fade bd-example-modal-lg"
+              tabindex="-1"
+              id="updateReport"
+              role="dialog"
+              aria-labelledby="myLargeModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-lg" role="document">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Edit Log
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="form-row">
+                        <div className="form-group col-md-4">
+                          <label for="inputName">Nama</label>
+                          <select
+                            type="text"
+                            name="namaUp"
+                            className="form-control"
+                            id="inputState"
+                            onChange={e => this.onChange(e)}
+                            value={this.state.namaUp}
+                          >
+                            <option selected>Choose</option>
+                            {data.length <= 0
+                              ? "NO DB ENTRIES YET"
+                              : data.map(dat => (
+                                  <option value={dat.name}>{dat.name}</option>
+                                ))}
+                          </select>
+                        </div>
+                        <div className="form-group col-md-4">
+                          <label for="inputType">Tanggal</label>
+                          <input
+                            type="date"
+                            className="form-control"
+                            name="tanggalUp"
+                            onChange={e => this.onChange(e)}
+                            value={this.state.tanggalUp}
+                          ></input>
+                        </div>
+                        <div className="form-group col-md-4">
+                          <label for="inputType">Jam</label>
+                          <input
+                            type="time"
+                            className="form-control"
+                            name="jamUp"
+                            onChange={e => this.onChange(e)}
+                            value={this.state.jamUp}
+                          ></input>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <label for="exampleFormControlTextarea1">Log</label>
+                        <textarea
+                          className="form-control"
+                          id="exampleFormControlTextarea1"
+                          rows="3"
+                          name="logUp"
+                          onChange={e => this.onChange(e)}
+                          value={this.state.logUp}
+                        ></textarea>
+                      </div>
+
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label for="inputCity">Pakan</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="inputCity"
+                            name="pakanUp"
+                            onChange={e => this.onChange(e)}
+                            value={this.state.pakanUp}
+                          ></input>
+                        </div>
+                        <div className="form-group col-md-6">
+                          <label for="inputUmur">Status</label>
+                          <select
+                            type="text"
+                            name="statusUp"
+                            className="form-control"
+                            id="inputCity"
+                            onChange={e => this.onChange(e)}
+                            value={this.state.statusUp}
+                          >
+                            <option selected>Choose</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Sakit">Sakit</option>
+                            <option value="Pemulihan">Pemulihan</option>
+                            <option value="Kritis">Kritis</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-success"
+                          onClick={e => this.updateData(e)}
+                        >
+                          Update
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  </div>
+                </div>
+                      </div>
+
+                              <span>
+                                {"   "}
+                              <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        onClick={e => this.setState({
+                          idUp:fil._id
+                        })}
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                      <div
+                        class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5
+                                class="modal-title"
+                                id="exampleModalLabel"
+                              ></h5>
+                              <button
+                                type="button"
+                                class="close"
+                                name="idUp"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                value={fil.idUp}
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div
+                              style={{ fontWeight: "bold" }}
+                              class="modal-body"
+                            >
+                              Yakin Menghapus Data ?
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                            
+                              <button type="button" 
+                                onClick={e => this.deleteData(e)}
+                                data-dismiss="modal"
+                              class="btn btn-danger">
+                                Hapus
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                     </span>
+                            </td>
                           </tr>
                         )
                       )

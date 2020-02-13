@@ -107,6 +107,13 @@ export default class LaporanKeuangan extends Component {
       }
     }
   }
+  print = async e => {
+    var divToPrint = document.getElementById("listJournal");
+    var newWin = window.open("");
+    newWin.document.write(divToPrint.outerHTML);
+    newWin.print();
+    newWin.close();
+  };
 
   addReport = async e => {
     e.preventDefault();
@@ -162,6 +169,16 @@ export default class LaporanKeuangan extends Component {
             >
               Tambah Transaksi
             </button>
+            <span>
+              {" "}
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={e => this.print(e)}
+              >
+                Download Jurnal
+              </button>
+            </span>
             <div
               className="modal fade bd-example-modal-lg"
               tabindex="-1"
@@ -277,11 +294,10 @@ export default class LaporanKeuangan extends Component {
             ></input>
             <div className="input-group-append"></div>
           </div>
-          <table class="table" id="listReports">
+          <table class="table" id="listJournal">
             <thead>
               <tr>
                 <th scope="col">Tanggal</th>
-
                 <th scope="col">Customer</th>
                 <th scope="col">ID</th>
                 <th scope="col">Harga</th>
