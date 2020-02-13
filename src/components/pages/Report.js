@@ -244,6 +244,7 @@ export default class Report extends Component {
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+                  
                   <div className="modal-body">
                     <form>
                       <div className="form-row">
@@ -354,13 +355,14 @@ export default class Report extends Component {
           </div>
         </div>
         <div>
+        
           <div className="container">
             <div className="input-group ">
               <div className="input-group mb-3">
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Cari burung..."
+                  placeholder="Cari Log"
                   aria-label=""
                   id="search"
                   onChange={e => this.searchReport(e)}

@@ -35,8 +35,13 @@ export default class Home extends Component {
       <Wrapper>
         <section className="jumbotron text-center">
           <div className="container">
-            <h1 className="jumbotron-heading">Purnama Farm</h1>
-            <p className="lead text-muted">
+            <h1
+              className="jumbotron-heading"
+              style={{ fontFamily: "Montserrat" }}
+            >
+              Purnama Farm
+            </h1>
+            <p className="lead text-muted" style={{ fontFamily: "Montserrat" }}>
               Something short and leading about the collection below—its
               contents, the creator, etc. Make it short and sweet, but not too
               short so folks don't simply skip over it entirely.

@@ -282,6 +282,33 @@ export default class LaporanKeuangan extends Component {
           </div>
         </div>
         <div className="container">
+          <div className="form-row" style={{ justifyContent: "space-between" }}>
+            <div className="form-group col-md-4">
+              <label for="inputState">Laporan Penjualan Perbulan</label>
+              <select
+                type="text"
+                name="Laporan"
+                className="form-control"
+                id="inputState"
+                value=""
+                onChange={e => this.onChange(e)}
+              >
+                <option selected>Plilih Bulan</option>
+                <option value="Januari">Januari</option>
+                <option value="Februari">Februari</option>
+                <option value="Maret">Maret</option>
+                <option value="April">April</option>
+                <option value="Mei">Mei</option>
+              </select>
+              <button type="button" className="btn btn-success">
+                Hitung Total Penjualan
+              </button>
+            </div>
+            <div className="form-group col-md-4">
+              <h5 style={{}}>Total Penjualan Bulan Maret Adalah</h5>
+              <h5 style={{ fontWeight: "bold" }}>Rp.35.000.000,00</h5>
+            </div>
+          </div>
           <div className="input-group ">
             <input
               type="text"

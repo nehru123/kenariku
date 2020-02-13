@@ -17,6 +17,62 @@ const Container = styled.nav`
   .action {
     text-align: end;
   }
+  .card-counter{
+    box-shadow: 2px 2px 10px #DADADA;
+    margin: 5px;
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 100px;
+    border-radius: 5px;
+    transition: .3s linear all;
+  }
+
+  .card-counter:hover{
+    box-shadow: 4px 4px 20px #DADADA;
+    transition: .3s linear all;
+  }
+
+  .card-counter.primary{
+    background-color: #007bff;
+    color: #FFF;
+  }
+
+  .card-counter.danger{
+    background-color: #ef5350;
+    color: #FFF;
+  }  
+
+  .card-counter.success{
+    background-color: #66bb6a;
+    color: #FFF;
+  }  
+
+  .card-counter.info{
+    background-color: #26c6da;
+    color: #FFF;
+  }  
+
+  .card-counter i{
+    font-size: 5em;
+    opacity: 0.2;
+  }
+
+  .card-counter .count-numbers{
+    position: absolute;
+    right: 35px;
+    top: 20px;
+    font-size: 32px;
+    display: block;
+  }
+
+  .card-counter .count-name{
+    position: absolute;
+    right: 35px;
+    top: 65px;
+    font-style: italic;
+    text-transform: capitalize;
+    opacity: 0.5;
+  }
 `;
 export default class FarmManagement extends Component {
   state = {
@@ -121,7 +177,7 @@ export default class FarmManagement extends Component {
       jenis_kelamin: this.state.jenis_kelamin,
       umur: this.state.umur,
       harga: this.state.harga,
-      status: 0,
+      status: 1,
       image1: this.state.image1,
       image2: this.state.image2,
       image3: this.state.image3
@@ -179,12 +235,7 @@ export default class FarmManagement extends Component {
   }
 
   render() {
-    // Select options for status
-    // const optionGender = [
-    //   { label: "* Select Gender", value: 0 },
-    //   { label: "jantan", value: "jantan" },
-    //   { label: "betina", value: "betina" }
-    // ];
+
     const { data } = this.state;
     const stat = ["Terjual", "Stok"];
     return (
@@ -348,33 +399,7 @@ export default class FarmManagement extends Component {
                             </div>
                           </div>
                         </div>
-
-
-                        {/* <div className="form-group">
-                          <div class="custom-file">
-                            <input
-                              type="file"
-                              class="custom-file-input"
-                              id="inputGroupFile02"
-                            ></input>
-                            <label
-                              class="custom-file-label"
-                              for="inputGroupFile02"
-                              aria-describedby="inputGroupFileAddon02"
-                            >
-                              Choose file
-                            </label>{" "}
-                          </div>{" "}
-                          <div class="input-group-append">
-                            <br></br>{" "}
-                            <span
-                              class="input-group-text"
-                              id="inputGroupFileAddon02"
-                            >
-                              Upload
-                            </span>
-                          </div>
-                        </div> */}
+                    
 
                         <div className="modal-footer">
                           <button
@@ -398,8 +423,33 @@ export default class FarmManagement extends Component {
         </div>
         <div>
           <div className="container">
+          <div class="row" style={{justifyContent:"center"}}>
+    <div class="col-md-3">
+      <div class="card-counter primary">
+        <i class="fa fa-code-fork"></i>
+        <span class="count-numbers">100</span>
+        <span class="count-name"> Burung Stock</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter danger">
+        <i class="fa fa-ticket"></i>
+        <span class="count-numbers">10</span>
+        <span class="count-name"> Burung Terjual</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter success">
+        <i class="fa fa-database"></i>
+        <span class="count-numbers">210</span>
+        <span class="count-name">Jumlah Semua Burung</span>
+      </div>
+      </div>
+      </div>
             <h2>List Burung Kenari</h2>
-            <p></p>
+           
             <div className="input-group mb-3">
               <input
                 type="text"
@@ -572,7 +622,7 @@ export default class FarmManagement extends Component {
                                   ></input>
                                 </div>
                               </div>
-
+                            
                               <div className="form-row">
                                 <div className="form-group col-md-3">
                                   <label for="inputCity">Gambar Depan</label>
@@ -696,7 +746,7 @@ export default class FarmManagement extends Component {
                       </div>
                     </span>
                   </td>
-                  <td></td>
+                 
                 </tr>
                 ))}
               </tbody>
