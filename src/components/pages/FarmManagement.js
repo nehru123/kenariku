@@ -14,9 +14,7 @@ const Container = styled.nav`
     margin: 0px auto;
     float: none;
   }
-  .action {
-    text-align: end;
-  }
+
   .card-counter{
     box-shadow: 2px 2px 10px #DADADA;
     margin: 5px;
@@ -238,6 +236,7 @@ export default class FarmManagement extends Component {
 
     const { data } = this.state;
     const stat = ["Terjual", "Stok"];
+   
     return (
       <Container>
         <div className="jumbotron jumbotron-fluid">
@@ -373,9 +372,7 @@ export default class FarmManagement extends Component {
                             ></input>
                           </div>
                         </div>
-
-
-                        <div className="form-row">
+                        <div className="form-row" style={{justifyContent:"space-between"}}>
                           <div className="form-group col-md-3">
                             <label for="inputCity">Gambar Depan</label>
                             <input type="file" id="image1"/>
@@ -427,15 +424,16 @@ export default class FarmManagement extends Component {
     <div class="col-md-3">
       <div class="card-counter primary">
         <i class="fa fa-code-fork"></i>
-        <span class="count-numbers">100</span>
+        <span class="count-numbers">{data.length}</span>
         <span class="count-name"> Burung Stock</span>
       </div>
     </div>
 
     <div class="col-md-3">
+    
       <div class="card-counter danger">
         <i class="fa fa-ticket"></i>
-        <span class="count-numbers">10</span>
+        <span class="count-numbers">1</span>
         <span class="count-name"> Burung Terjual</span>
       </div>
     </div>
@@ -443,7 +441,7 @@ export default class FarmManagement extends Component {
     <div class="col-md-3">
       <div class="card-counter success">
         <i class="fa fa-database"></i>
-        <span class="count-numbers">210</span>
+        <span class="count-numbers">{data.length}</span>
         <span class="count-name">Jumlah Semua Burung</span>
       </div>
       </div>
@@ -463,8 +461,21 @@ export default class FarmManagement extends Component {
             </div>
 
             {/* Table Bird */}
-            <table className="table" id="listBirds">
-              <tbody>
+            <table className="table" >
+            <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Jenis</th>
+                  <th scope="col">Warna</th>
+                  <th scope="col">Umur</th>
+                  <th scope="col">Jenis Kelamin</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="listBirds">
               {data.length <= 0
             ? 'NO DB ENTRIES YET'
             : data.map((dat) => (
@@ -480,7 +491,7 @@ export default class FarmManagement extends Component {
                   <td>{dat.name}</td>
                   <td>{dat.jenis}</td>
                   <td>{dat.warna}</td>
-                  <td>{dat.umur}</td>
+                  <td>{dat.umur} bulan</td>
                   <td>{dat.jenis_kelamin}</td>
                   <td>{dat.harga}</td>
                   <td>{stat[dat.status]}</td>

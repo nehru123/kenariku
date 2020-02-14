@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import api from '../utils/ServicesBurung';
+import api from "../utils/ServicesBurung";
 
 const Container = styled.nav`
   max-width: 100%;
@@ -23,10 +23,20 @@ const Container = styled.nav`
   .card-text {
     text-align: left;
   }
+  .img {
+    width: 500px;
+    height: 600px;
+  }
+  .item {
+    width: 600px;
+
+    min-height: 120px;
+    max-height: auto;
+    float: left;
+    margin: 10px;
+    padding: 20px;
+  }
 `;
-
-
-
 
 export default class LihatBurung extends Component {
   state = {
@@ -36,13 +46,13 @@ export default class LihatBurung extends Component {
 
   componentDidMount = async () => {
     var query = window.location.search.substring(1);
-     await api.getBirdById(query).then(bird => {
-       console.log(bird)
+    await api.getBirdById(query).then(bird => {
+      console.log(bird);
       this.setState({
         data: bird.data
-      })
-    })
-  }
+      });
+    });
+  };
   render() {
     const { data } = this.state;
     const stat = ["Terjual", "Stok"];
@@ -51,27 +61,29 @@ export default class LihatBurung extends Component {
         <div classNameName="wrapper">
           <div className="card mb-10">
             <div className="row no-gutters">
-              <div style={{ marginLeft: 50 }} className="col-md-5">
-                <Carousel showStatus={false} width="350px">
-                  <div>
-                    <img src={this.state.path+data.image1} alt="Depan" />
-                  </div>
-                  <div>
-                    <img src={this.state.path+data.image2} alt="Samping" />
-                  </div>
-                  <div>
-                    <img src={this.state.path+data.image3} alt="Belakang" />
-                  </div>
-                </Carousel>
+              <div style={{ marginLeft: 60 }} className="col-md-5">
+                <div className="item">
+                  <Carousel showStatus={false} showThumbs={false} width="400px">
+                    <div>
+                      <img src={this.state.path + data.image1} />
+                    </div>
+                    <div>
+                      <img src={this.state.path + data.image2} />
+                    </div>
+                    <div>
+                      <img src={this.state.path + data.image3} />
+                    </div>
+                  </Carousel>
+                </div>
               </div>
               <div className="col-md-5">
                 <div className="card-body">
-                  <h1 className="card-title">{data.name} {stat[data.status]}</h1>
+                  <h1 className="card-title">
+                    {data.name} {stat[data.status]}
+                  </h1>
 
                   <hr></hr>
-                  <p className="card-text">
-                    {data.deskripsi}
-                  </p>
+                  <p className="card-text">{data.deskripsi}</p>
                   <p>Jenis :{data.jenis}</p>
                   <hr></hr>
                   <p>Umur : {data.umur}</p>

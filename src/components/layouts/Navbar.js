@@ -109,7 +109,7 @@ class Navbar extends React.Component {
             ) : (
               <React.Fragment>
                 <li className="nav-item">
-                  <button
+                  {/* <button
                     className="btn"
                     style={{ backgroundColor: "transparent", color: "white" }}
                   >
@@ -117,7 +117,7 @@ class Navbar extends React.Component {
                       className="fa fa-sign-in  "
                       onClick={() => this.onClickLogout()}
                     ></i>
-                  </button>
+                  </button> */}
                 </li>
               </React.Fragment>
             )}

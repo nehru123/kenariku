@@ -4,258 +4,402 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import GaleryCards from "../layouts/GaleryCards";
 import { Howl } from "howler";
-import {
-  Container,
-  Button,
-  Link,
-  lightColors,
-  darkColors
-} from "react-floating-action-button";
-const Contaner = styled.nav`
-  padding: 0;
+import api from "../utils/ServicesGallery";
 
-  max-width: 100%;
-`;
-const audioClips = [
-  {
-    sound: "http://www.cityhallrecords.com/samples/audio/725543506023S1.mp3",
-    label: "play"
-  }
-];
+const Contaner = styled.nav``;
+
 export default class Galery extends Component {
-  soundPlay = src => {
-    const sound = new Howl({
-      src,
-      html5: true
-    });
-    sound.play();
-    sound.stop();
+  state = {
+    path: "http://localhost:5000/img/",
+    name: "",
+    judulUp: "",
+    deskripsi: "",
+    jenisUp: "",
+    warnaUp: "",
+    jenis_kelaminUp: "",
+    umurUp: "",
+    hargaUp: "",
+    status: "",
+    judul: "",
+    foto: "",
+    jenis: "",
+    warna: "",
+    jenis_kelamin: "",
+    umur: "",
+    harga: "",
+    data: [],
+    file: [],
+    idUp: "",
+    id: 0,
+    _id: "",
+    message: null,
+    intervalIsSet: false,
+    idToDelete: null,
+    idToUpdate: null,
+    objectToUpdate: null
   };
-  renderButtonSound = () => {
-    return audioClips.map((soundObj, index) => {
-      return (
-        <button key={index} onClick={() => this.soundPlay(soundObj.sound)}>
-          {soundObj.label}
-        </button>
-      );
+  // when component mounts, first thing it does is fetch all existing data in our db
+  // then we incorporate a polling logic so that we can easily see if our db has
+  // changed and implement those changes into our UI
+  componentDidMount = async () => {
+    this.setState({ isLoading: true });
+    await api.getAllG().then(gallery => {
+      console.log(gallery);
+      this.setState({
+        file: gallery.data.data,
+        isLoading: false
+      });
+    });
+    await api.getAllBirds().then(bird => {
+      console.log(bird);
+      this.setState({
+        data: bird.data.data,
+        isLoading: false
+      });
     });
   };
-  render() {
-    return (
-      <Contaner>
-        <div
-          id="carouselExampleCaptions"
-          class="carousel slide"
-          data-ride="carousel"
-        >
-          <ol class="carousel-indicators">
-            <li
-              data-target="#carouselExampleCaptions"
-              data-slide-to="0"
-              class="active"
-            ></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img
-                src="https://cdn.pixabay.com/photo/2016/03/27/18/49/vintage-1283575_960_720.jpg"
-                class="d-block w-100"
-                alt="..."
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://cdn.pixabay.com/photo/2016/03/27/18/49/vintage-1283575_960_720.jpg"
-                class="d-block w-100"
-                alt="..."
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img
-                src="https://cdn.pixabay.com/photo/2016/03/27/18/49/vintage-1283575_960_720.jpg"
-                class="d-block w-100"
-                alt="..."
-              />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </div>
-            </div>
-          </div>
-          <a
-            class="carousel-control-prev"
-            href="#carouselExampleCaptions"
-            role="button"
-            data-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a
-            class="carousel-control-next"
-            href="#carouselExampleCaptions"
-            role="button"
-            data-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-        <div class="album py-5 bg-light">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Border.jpg?w=600&ssl=1"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Yorkshire.jpg?w=600&ssl=1"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Norwich.jpg?w=600&ssl=1"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Roller.jpg?w=600&ssl=1"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Gloster.jpg?w=600&ssl=1"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Frill.jpg?w=600&ssl=1"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Lancashire.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Crest.jpg?w=600&ssl=1"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Lizard.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Spanish-Timbrado.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-American-Singer.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Rusia.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Waterslager.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Stafford.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Cinnamon.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Color-Bred.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Red-Factor.jpg?resize=600%2C400"
-                />
-              </div>
-              <div class="col-md-4">
-                <GaleryCards
-                  desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                  picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Gibber-Italicus.jpg?resize=600%2C400"
-                />
-              </div>
-            </div>
-            <Container>
-              <Link
-                href="#"
-                styles={{
-                  backgroundColor: "#007BFF",
-                  color: lightColors.white
-                }}
-                tooltip="Add Album"
-                icon="fa fa-eye"
-                data-toggle="modal"
-                data-target=".bd-example-modal-lg"
-                className="fab-item btn btn-link btn-lg text-white"
-              ></Link>
+  componentWillUnmount() {
+    if (this.state.intervalIsSet) {
+      clearInterval(this.state.intervalIsSet);
+      this.setState({ intervalIsSet: null });
+    }
+  }
+  onChange({ target }) {
+    this.setState({
+      [target.name]: target.value
+    });
+  }
 
-              <Button
-                styles={{
-                  backgroundColor: "#007BFF",
-                  color: lightColors.white
-                }}
-                tooltip=""
-                icon="fa fa-plus"
-                rotate={true}
-                // onClick={() => alert("Tambahkan Album")}
-              />
-            </Container>
+  getDataFromDb = () => {
+    api.getAllBirds().then(bird => {
+      this.setState({
+        data: bird.data.data
+      });
+    });
+  };
+
+  searchBird({ target }) {
+    // Declare variables
+    var filter, table, tr, td, i, j, txtValue, temp;
+    filter = target.value.toUpperCase();
+    table = document.getElementById("listBirds");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      var c = 0;
+      td = tr[i].getElementsByTagName("td");
+      for (j = 0; j < td.length; j++) {
+        temp = td[j];
+        if (temp) {
+          txtValue = temp.textContent || temp.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            c = 1;
+          }
+        }
+      }
+      if (c > 0) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+
+  addG = async e => {
+    e.preventDefault();
+
+    const payload = {
+      judul: this.state.judul,
+      deskripsi: this.state.deskripsi,
+      foto: this.state.foto
+    };
+
+    await api.insertGallery(payload).then(res => {
+      window.alert(`Collection successfully`);
+      this.getDataFromDb();
+    });
+    //registerburung(burungData);
+  };
+
+  deleteData = async () => {
+    await api.deleteGById(this.state.idUp).then(res => {
+      window.alert(`Bird deleted successfully`);
+      this.getDataFromDb();
+    });
+    //registerburung(burungData);
+  };
+
+  uploadImage = async ({ target }) => {
+    var image = document.getElementById(target.name).files[0];
+    var formdata = new FormData();
+    formdata.append("files", image, image.name);
+    await api.upload(formdata).then(res => {
+      if (res.data.success) {
+        window.alert("Gambar " + target.name + " berhasil di upload");
+        this.setState({
+          [target.name]: res.data.data
+        });
+      } else {
+        window.alert(res.data.data);
+      }
+    });
+  };
+
+  render() {
+    const { data } = this.state;
+    const { file } = this.state;
+    return (
+      <React.Fragment>
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-4">Gallery</h1>
+            <p className="lead">
+              Gallery digunakan untuk melihat dan menambahkan Gallery burung
+              kenari.
+            </p>
+            <button
+              type="button"
+              className="btn btn-success"
+              data-toggle="modal"
+              data-target=".bd-example-modal-lg"
+            >
+              Tambah Gallery
+            </button>
+
+            <div
+              className="modal fade bd-example-modal-lg"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="myLargeModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-lg" role="document">
+                <div className="modal-content" closeModal={this.closeModal}>
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Gallery Burung
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label for="inputName">Burung</label>
+                          <select
+                            type="text"
+                            name="judulUp"
+                            className="form-control"
+                            id="inputState"
+                            onChange={e => this.onChange(e)}
+                            value={this.state.judulUp}
+                          >
+                            <option selected>Choose</option>
+                            {data.length <= 0
+                              ? "NO DB ENTRIES YET"
+                              : data.map(dat => (
+                                  <option value={dat._id}>{dat.name}</option>
+                                ))}
+                          </select>
+                        </div>
+
+                        <div className="form-group col-md-6">
+                          <label for="inputCity">Judul</label>
+                          <input
+                            type="text"
+                            name="judul"
+                            className="form-control"
+                            id="inputCity"
+                            onChange={e => this.onChange(e)}
+                            value={this.state.judul}
+                            required
+                          ></input>
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <label for="exampleFormControlTextarea1">
+                          Deskripsi
+                        </label>
+                        <textarea
+                          className="form-control"
+                          id="exampleFormControlTextarea1"
+                          rows="3"
+                          name="deskripsi"
+                          onChange={e => this.onChange(e)}
+                          value={this.state.deskripsi}
+                          // onChange={e => this.onChange(e)}
+                          required
+                        ></textarea>
+                      </div>
+
+                      <div className="form-row">
+                        <div className="form-group col-md-3">
+                          <label for="inputCity">Gambar Depan</label>
+                          <input type="file" id="image1" />
+                          <div class="form-group">
+                            <button
+                              type="button"
+                              name="foto"
+                              class="btn btn-primary"
+                              onClick={e => this.uploadImage(e)}
+                            >
+                              Upload
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          data-dismiss="modal"
+                          className="btn btn-success"
+                          onClick={e => this.addG(e)}
+                        >
+                          Tambahkan
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </Contaner>
+
+        <Contaner>
+          <div class="album py-5 bg-light">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Border.jpg?w=600&ssl=1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Yorkshire.jpg?w=600&ssl=1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Norwich.jpg?w=600&ssl=1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Roller.jpg?w=600&ssl=1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Gloster.jpg?w=600&ssl=1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Frill.jpg?w=600&ssl=1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Lancashire.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Crest.jpg?w=600&ssl=1"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Lizard.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Spanish-Timbrado.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-American-Singer.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Rusia.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Waterslager.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Stafford.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Cinnamon.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Color-Bred.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Red-Factor.jpg?resize=600%2C400"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <GaleryCards
+                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Gibber-Italicus.jpg?resize=600%2C400"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Contaner>
+      </React.Fragment>
     );
   }
 }

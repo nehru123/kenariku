@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./App.css";
 
 // Components
+import PrivateRoute from "./Common/PrivateRoute";
 import Navbar from "./components/layouts/Navbar";
 import Home from "./components/pages/Home";
 import Footer from "./components/layouts/Footer";
@@ -54,21 +55,41 @@ class App extends React.Component {
         <Provider store={store}>
           <Router>
             <Navbar />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Login} />
+            <Route exact path="/Register" component={Register} />
             <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/Home" component={Home} />
-              <Route exact path="/detail" component={Detail} />
-              <Route exact path="/farmmanagement" component={FarmManagement} />
-              <Route exact path="/Galery" component={Galery} />
-              <Route exact path="/lihat" component={LihatBurung} />
-              <Route exact path="/Report" component={Report} />
-              <Route exact path="/Berita" component={Berita} />
-
-              <Route exact path="/Register" component={Register} />
-              <Route
+              <PrivateRoute exact path="/Home" component={Home} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/detail" component={Detail} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/Farmmanagement"
+                component={FarmManagement}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/lihat" component={LihatBurung} />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/Report" component={Report} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
                 exact
                 path="/LaporanKeuangan"
                 component={LaporanKeuangan}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/Galery" component={Galery} />
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute exact path="/Berita" component={Berita} />
               />
             </Switch>
           </Router>

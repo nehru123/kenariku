@@ -23,6 +23,7 @@ export default class LaporanKeuangan extends Component {
     tanggal: "",
     idBird: "",
     pembeli: "",
+    filter: "",
     harga: "",
     data: [],
     file: [],
@@ -84,7 +85,7 @@ export default class LaporanKeuangan extends Component {
     // Declare variables
     var filter, table, tr, td, i, j, txtValue, temp;
     filter = target.value.toUpperCase();
-    table = document.getElementById("listReports");
+    table = document.getElementById("listJournal");
     tr = table.getElementsByTagName("tr");
 
     // Loop through all table rows, and hide those who don't match the search query
@@ -287,18 +288,19 @@ export default class LaporanKeuangan extends Component {
               <label for="inputState">Laporan Penjualan Perbulan</label>
               <select
                 type="text"
-                name="Laporan"
+                name="filter"
                 className="form-control"
                 id="inputState"
                 value=""
                 onChange={e => this.onChange(e)}
+                value={this.state.filter}
               >
                 <option selected>Plilih Bulan</option>
-                <option value="Januari">Januari</option>
-                <option value="Februari">Februari</option>
-                <option value="Maret">Maret</option>
-                <option value="April">April</option>
-                <option value="Mei">Mei</option>
+                <option value="0">Januari</option>
+                <option value="1">Februari</option>
+                <option value="2">Maret</option>
+                <option value="3">April</option>
+                <option value="4">Mei</option>
               </select>
               <button type="button" className="btn btn-success">
                 Hitung Total Penjualan
@@ -321,7 +323,7 @@ export default class LaporanKeuangan extends Component {
             ></input>
             <div className="input-group-append"></div>
           </div>
-          <table class="table" id="listJournal">
+          <table class="table">
             <thead>
               <tr>
                 <th scope="col">Tanggal</th>
@@ -332,7 +334,7 @@ export default class LaporanKeuangan extends Component {
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="listJournal">
               {file.length <= 0
                 ? "NO DB ENTRIES YET"
                 : file.map(
@@ -350,6 +352,10 @@ export default class LaporanKeuangan extends Component {
                           <td>{fil.pembeli}</td>
                           <td>{fil.idBird}</td>
                           <td>{fil.harga}</td>
+                          <td>{fil.status}</td>
+                          <td>
+                            <button className="btn btn-success">Detail</button>
+                          </td>
                         </tr>
                       )
                     )

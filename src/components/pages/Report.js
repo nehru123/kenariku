@@ -233,7 +233,7 @@ export default class Report extends Component {
                 <div className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
-                      Update
+                      Tambahkan
                     </h5>
                     <button
                       type="button"
@@ -371,19 +371,19 @@ export default class Report extends Component {
               </div>
             </div>
 
-            <table class="table" id="listReports">
+            <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Nama</th>
                   <th scope="col">Tanggal</th>
                   <th scope="col">Jam</th>
-                  <th scope="col">Pakan</th>
                   <th scope="col">Log</th>
+                  <th scope="col">Pakan</th>
                   <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="listReports">
                 {file.length <= 0
                   ? "NO DB ENTRIES YET"
                   : file.map(
