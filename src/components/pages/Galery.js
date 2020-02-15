@@ -12,7 +12,7 @@ export default class Galery extends Component {
   state = {
     path: "http://localhost:5000/img/",
     name: "",
-    judulUp: "",
+    namaBurung: "",
     deskripsi: "",
     jenisUp: "",
     warnaUp: "",
@@ -43,10 +43,10 @@ export default class Galery extends Component {
   // changed and implement those changes into our UI
   componentDidMount = async () => {
     this.setState({ isLoading: true });
-    await api.getAllG().then(gallery => {
-      console.log(gallery);
+    await api.getAllGallery().then(galleries => {
+      console.log(galleries);
       this.setState({
-        file: gallery.data.data,
+        file: galleries.data.data,
         isLoading: false
       });
     });
@@ -106,10 +106,11 @@ export default class Galery extends Component {
     }
   }
 
-  addG = async e => {
+  add = async e => {
     e.preventDefault();
 
     const payload = {
+      namaBurung: this.state.namaBurung,
       judul: this.state.judul,
       deskripsi: this.state.deskripsi,
       foto: this.state.foto
@@ -196,11 +197,11 @@ export default class Galery extends Component {
                           <label for="inputName">Burung</label>
                           <select
                             type="text"
-                            name="judulUp"
+                            name="namaBurung"
                             className="form-control"
                             id="inputState"
                             onChange={e => this.onChange(e)}
-                            value={this.state.judulUp}
+                            value={this.state.namaBurung}
                           >
                             <option selected>Choose</option>
                             {data.length <= 0
@@ -244,7 +245,7 @@ export default class Galery extends Component {
                       <div className="form-row">
                         <div className="form-group col-md-3">
                           <label for="inputCity">Gambar Depan</label>
-                          <input type="file" id="image1" />
+                          <input type="file" id="foto" />
                           <div class="form-group">
                             <button
                               type="button"
@@ -270,7 +271,7 @@ export default class Galery extends Component {
                           type="submit"
                           data-dismiss="modal"
                           className="btn btn-success"
-                          onClick={e => this.addG(e)}
+                          onClick={e => this.add(e)}
                         >
                           Tambahkan
                         </button>
