@@ -9,12 +9,14 @@ export default class GaleryCards extends Component {
     return (
       <Container>
         <div class="card mb-4 shadow-sm">
-          <img
-            class="bd-placeholder-img card-img-top"
-            src={this.props.picture}
-            width="100%"
-            height="225"
-          ></img>
+          <Link to="/Koleksi">
+            <img
+              class="bd-placeholder-img card-img-top"
+              src={this.props.picture}
+              width="100%"
+              height="225"
+            ></img>
+          </Link>
           <div class="card-body">
             <p class="card-text">{this.props.desc}</p>
             <div class="d-flex justify-content-between align-items-center">

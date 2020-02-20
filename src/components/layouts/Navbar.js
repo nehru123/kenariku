@@ -70,7 +70,7 @@ class Navbar extends React.Component {
                 </li>
                 <li className="nav-item">
                   <Link to="/FarmManagement" className="card-link">
-                    <a className="nav-link">Farm Management</a>
+                    <a className="nav-link">List Bird</a>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -80,7 +80,7 @@ class Navbar extends React.Component {
                 </li>
                 <li className="nav-item">
                   <Link to="/Report" className="card-link">
-                    <a className="nav-link">Report</a>
+                    <a className="nav-link">Daily Log</a>
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -88,9 +88,15 @@ class Navbar extends React.Component {
                     <a className="nav-link">Finance</a>
                   </Link>
                 </li>
+
+                {/* <li className="nav-item">
+                  <Link to="/Jadwal" className="card-link">
+                    <a className="nav-link">Jadwal</a>
+                  </Link>
+                </li> */}
                 <li className="nav-item">
-                  <Link to="/Berita" className="card-link">
-                    <a className="nav-link">Berita</a>
+                  <Link to="/Breeding" className="card-link">
+                    <a className="nav-link">Breeding</a>
                   </Link>
                 </li>
 

@@ -22,9 +22,11 @@ export default class LaporanKeuangan extends Component {
   state = {
     tanggal: "",
     idBird: "",
+    tahun: "",
     pembeli: "",
     filter: "",
     harga: "",
+    jumlah: "",
     data: [],
     file: [],
     idUp: "",
@@ -83,7 +85,16 @@ export default class LaporanKeuangan extends Component {
 
   searchReport({ target }) {
     // Declare variables
-    var filter, table, tr, td, i, j, txtValue, temp;
+    var filter,
+      tahun,
+      table,
+      tr,
+      td,
+      i,
+      j,
+      txtValue,
+      temp,
+      jum = 0;
     filter = target.value.toUpperCase();
     table = document.getElementById("listJournal");
     tr = table.getElementsByTagName("tr");
@@ -103,10 +114,16 @@ export default class LaporanKeuangan extends Component {
       }
       if (c > 0) {
         tr[i].style.display = "";
+        jum += parseFloat(td[3].innerText);
       } else {
         tr[i].style.display = "none";
       }
     }
+    this.setState({
+      jumlah: jum,
+      filter: target.value,
+      tahun: target.value
+    });
   }
   print = async e => {
     var divToPrint = document.getElementById("listJournal");
@@ -131,14 +148,17 @@ export default class LaporanKeuangan extends Component {
     });
 
     await api.updateBirdById(this.state.idBird).then(res => {
-      window.alert(`Bird updated successfully`);
       this.getDataFromDb();
     });
     //registerburung(burungData);
   };
   render() {
+    const stat = ["Terjual", "Stok"];
     const { data } = this.state;
     const { file } = this.state;
+    const { jumlah } = this.state;
+    const { filter } = this.state;
+    const { tahun } = this.state;
     const months = [
       "January",
       "February",
@@ -160,9 +180,10 @@ export default class LaporanKeuangan extends Component {
           <div className="container">
             <h1 className="display-4">Laporan Keuangan</h1>
             <p className="lead">
-              Laporan digunakan untuk melihat dan laporan burung kenari.
+              Laporan digunakan untuk melihat laporan keuangan dan transaksi
+              burung kenari.
             </p>
-            <button
+            {/* <button
               type="button"
               className="btn btn-success"
               data-toggle="modal"
@@ -279,36 +300,57 @@ export default class LaporanKeuangan extends Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="container">
           <div className="form-row" style={{ justifyContent: "space-between" }}>
-            <div className="form-group col-md-4">
-              <label for="inputState">Laporan Penjualan Perbulan</label>
+            <div className="form-group col-md-3">
+              {/* <label for="inputState">Laporan Penjualan Perbulan</label> */}
               <select
                 type="text"
                 name="filter"
                 className="form-control"
                 id="inputState"
-                value=""
-                onChange={e => this.onChange(e)}
-                value={this.state.filter}
+                onChange={e => this.searchReport(e)}
               >
-                <option selected>Plilih Bulan</option>
-                <option value="0">Januari</option>
-                <option value="1">Februari</option>
-                <option value="2">Maret</option>
-                <option value="3">April</option>
-                <option value="4">Mei</option>
+                <option value="" selected>
+                  Plilih Bulan
+                </option>
+                <option value="January">Januari</option>
+                <option value="February">Februari</option>
+                <option value="Maret">Maret</option>
+                <option value="April">April</option>
+                <option value="Mei">Mei</option>
+                <option value="Juni">Juni</option>
+                <option value="Juli">July</option>
+                <option value="Agustus">Agustus</option>
               </select>
-              <button type="button" className="btn btn-success">
+              {/* <button type="button" className="btn btn-success">
                 Hitung Total Penjualan
-              </button>
+              </button> */}
+            </div>
+
+            <div className="form-group col-md-3">
+              {/* <label for="inputState"></label> */}
+              <select
+                type="text"
+                name="tahun"
+                className="form-control"
+                id="inputState"
+                onChange={e => this.searchReport(e)}
+              >
+                <option value="" selected>
+                  Plilih Tahun
+                </option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+              </select>
             </div>
             <div className="form-group col-md-4">
-              <h5 style={{}}>Total Penjualan Bulan Maret Adalah</h5>
-              <h5 style={{ fontWeight: "bold" }}>Rp.35.000.000,00</h5>
+              <h5 style={{}}>Total Penjualan Bulan {filter} Adalah</h5>
+              <h5 style={{ fontWeight: "bold" }}>Rp.{jumlah},00</h5>
             </div>
           </div>
           <div className="input-group ">
@@ -326,11 +368,10 @@ export default class LaporanKeuangan extends Component {
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Tanggal</th>
-                <th scope="col">Customer</th>
-                <th scope="col">ID</th>
-                <th scope="col">Harga</th>
-                <th scope="col">Status</th>
+                <th scope="col">Bulan</th>
+                <th scope="col">Pendapatan</th>
+                <th scope="col">Pengeluaran</th>
+
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -343,18 +384,16 @@ export default class LaporanKeuangan extends Component {
                       (
                         <tr>
                           <td>
-                            {d.getDate() +
-                              " " +
-                              months[d.getMonth()] +
-                              " " +
-                              d.getFullYear()}
+                            {" " + months[d.getMonth()] + " " + d.getFullYear()}
                           </td>
-                          <td>{fil.pembeli}</td>
-                          <td>{fil.idBird}</td>
-                          <td>{fil.harga}</td>
-                          <td>{fil.status}</td>
+                          <td>500k</td>
+                          <td>150k</td>
                           <td>
-                            <button className="btn btn-success">Detail</button>
+                            <Link to="/DetailKeuangan">
+                              <button className="btn btn-success">
+                                Detail
+                              </button>
+                            </Link>
                           </td>
                         </tr>
                       )

@@ -110,12 +110,19 @@ export default class FarmManagement extends Component {
   componentDidMount = async () => {
     this.setState({ isLoading: true })
      await api.getAllBirds().then(bird => {
-       console.log(bird)
       this.setState({
         data: bird.data.data,
-        isLoading: false,
       })
     })
+    var s = 0;
+    var  t = 0;
+    this.state.data.map((dat) => (
+      dat.status == 1 
+      ? s = s + 1
+      : t = t + 1
+      ));
+    document.getElementById("stock").innerHTML = s;
+    document.getElementById("jual").innerHTML = t;
   }
   componentWillUnmount() {
     if (this.state.intervalIsSet) {
@@ -130,6 +137,15 @@ export default class FarmManagement extends Component {
         data: bird.data.data,
       })
     })
+    var s = 0;
+    var  t = 0;
+    this.state.data.map((dat) => (
+      dat.status == 1 
+      ? s = s + 1
+      : t = t + 1
+      ));
+    document.getElementById("stock").innerHTML = s;
+    document.getElementById("jual").innerHTML = t;
   };
 
   onChange({ target }) {
@@ -180,11 +196,13 @@ export default class FarmManagement extends Component {
       image2: this.state.image2,
       image3: this.state.image3
     };
-
-    await api.insertBird(payload).then(res => {
-            window.alert(`Bird inserted successfully`);
-            this.getDataFromDb();
-        })
+    if (payload.name&&payload.deskripsi&&payload.jenis&&payload.warna&&payload.jenis_kelamin&&payload.umur&&payload.image1&&payload.image2&&payload.image3) {
+      await api.insertBird(payload).then(res => {
+        window.alert(`Bird inserted successfully`);
+        this.getDataFromDb();
+      })
+    }else window.alert(`Mohon isi form dengan lengkap`);
+    
     //registerburung(burungData);
   }
   updateData = async (e) =>  {
@@ -203,11 +221,12 @@ export default class FarmManagement extends Component {
       image2: this.state.image2Up,
       image3: this.state.image3Up
     };
-
-    await api.updateBirdById(this.state.idUp,payload).then(res => {
+    if (payload.name&&payload.deskripsi&&payload.jenis&&payload.warna&&payload.jenis_kelamin&&payload.umur&&payload.image1&&payload.image2&&payload.image3) {
+      await api.updateBirdById(this.state.idUp,payload).then(res => {
             window.alert(`Bird updated successfully`);
             this.getDataFromDb();
         })
+    }else window.alert(`Mohon isi form dengan lengkap`);
     //registerburung(burungData);
   }
     deleteData = async () =>  {
@@ -216,6 +235,11 @@ export default class FarmManagement extends Component {
       this.getDataFromDb();
     })
     //registerburung(burungData);
+  }
+
+  preview  = async ({ target }) =>{
+    var output = document.getElementById("output"+target.id);
+    output.src = URL.createObjectURL(target.files[0]);
   }
 
   uploadImage  = async ({ target }) =>{  
@@ -284,7 +308,7 @@ export default class FarmManagement extends Component {
                       <form>
                         <div className="form-row">
                           <div className="form-group col-md-6">
-                            <label for="inputName">Nama</label>
+                            <label for="inputName"> Ring ID</label>
                             <input
                               type="text"
                               name="name"
@@ -294,16 +318,28 @@ export default class FarmManagement extends Component {
                             ></input>
                           </div>
                           <div className="form-group col-md-6">
-                            <label for="inputType">Jenis</label>
-                            <input
+                            <label for="inputCity">Jenis</label>
+                            <select 
                               type="text"
                               name="jenis"
                               className="form-control"
+                              id="inputCity"
                               onChange={e => this.onChange(e)}
-                              required
-                            ></input>
+                              value={this.state.jenis}
+                              >
+                              <option selected>Choose</option>
+                              <option value="Kenari Melayu">Kenari Melayu</option>
+                              <option value="Kenari Yorkshire">Kenari Yorkshire</option>
+                              <option value="Kenari Waterslager">Kenari Waterslager</option>
+                              <option value="Kenari Spanish Timbrado">Kenari Spanish Timbrado</option>
+                              <option value=" Kenari Border">Kenari Border</option>
+                              <option value="Kenari Gloster">Kenari Gloster</option>
+                              <option value="Kenari Melayu">Kenari Melayu</option>
+                              <option value="Kenari Norwich">Kenari Norwich</option>
+                            
+                            </select>
                           </div>
-                        </div>
+                          </div>
 
                         <div className="form-group">
                           <label for="exampleFormControlTextarea1">
@@ -375,14 +411,16 @@ export default class FarmManagement extends Component {
                         <div className="form-row" style={{justifyContent:"space-between"}}>
                           <div className="form-group col-md-3">
                             <label for="inputCity">Gambar Depan</label>
-                            <input type="file" id="image1"/>
+                            <input type="file" id="image1" onChange={e => this.preview(e)}/>
+                            <img id="outputimage1" width="100px" height="100px"/>
                             <div class="form-group">
                               <button type="button" name="image1" class="btn btn-primary" onClick={e => this.uploadImage(e)}>Upload</button>
                             </div>
                           </div>
                           <div className="form-group col-md-3">
                             <label for="inputCity">Gambar Depan</label>
-                            <input type="file" id="image2"/>
+                            <input type="file" id="image2" onChange={e => this.preview(e)}/>
+                            <img id="outputimage2" width="100px" height="100px"/>
                             <div class="form-group">
                               <button type="button" name="image2" class="btn btn-primary" onClick={e => this.uploadImage(e)}>Upload</button>
                             </div>
@@ -390,7 +428,8 @@ export default class FarmManagement extends Component {
 
                           <div className="form-group col-md-3">
                             <label for="inputCity">Gambar Depan</label>
-                            <input type="file" id="image3"/>
+                            <input type="file" id="image3" onChange={e => this.preview(e)}/>
+                            <img id="outputimage3" width="100px" height="100px"/>
                             <div class="form-group">
                               <button type="button" name="image3" class="btn btn-primary" onClick={e => this.uploadImage(e)}>Upload</button>
                             </div>
@@ -406,7 +445,7 @@ export default class FarmManagement extends Component {
                           >
                             Close
                           </button>
-                          <button type="submit" data-dismiss="modal" className="btn btn-success" onClick={e => this.addBird(e)}>
+                          <button type="submit" className="btn btn-success" onClick={e => this.addBird(e)}>
                             Tambahkan
                           </button>
                         </div>
@@ -424,7 +463,7 @@ export default class FarmManagement extends Component {
     <div class="col-md-3">
       <div class="card-counter primary">
         <i class="fa fa-code-fork"></i>
-        <span class="count-numbers">{data.length}</span>
+        <span class="count-numbers" id="stock"></span>
         <span class="count-name"> Burung Stock</span>
       </div>
     </div>
@@ -433,7 +472,7 @@ export default class FarmManagement extends Component {
     
       <div class="card-counter danger">
         <i class="fa fa-ticket"></i>
-        <span class="count-numbers">1</span>
+        <span class="count-numbers" id="jual"></span>
         <span class="count-name"> Burung Terjual</span>
       </div>
     </div>

@@ -244,7 +244,7 @@ export default class Report extends Component {
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  
+
                   <div className="modal-body">
                     <form>
                       <div className="form-row">
@@ -355,7 +355,6 @@ export default class Report extends Component {
           </div>
         </div>
         <div>
-        
           <div className="container">
             <div className="input-group ">
               <div className="input-group mb-3">
@@ -404,7 +403,7 @@ export default class Report extends Component {
                             <td>{fil.pakan}</td>
                             <td>{fil.status}</td>
                             <td>
-                              <button
+                              {/* <button
                                 type="button"
                                 className="btn btn-success"
                                 data-toggle="modal"
@@ -617,6 +616,24 @@ export default class Report extends Component {
                         </div>
                       </div>
                      </span>
+             */}
+                              {/* <span>
+                                {""}
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value=""
+                                    id="defaultCheck1"
+                                  />
+                                  <label
+                                    class="form-check-label"
+                                    for="defaultCheck1"
+                                  >
+                                    Done
+                                  </label>
+                                </div>
+                              </span> */}
                             </td>
                           </tr>
                         )

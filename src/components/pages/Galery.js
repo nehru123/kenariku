@@ -6,7 +6,12 @@ import GaleryCards from "../layouts/GaleryCards";
 import { Howl } from "howler";
 import api from "../utils/ServicesGallery";
 
-const Contaner = styled.nav``;
+const Contaner = styled.nav`
+  .jumbotron {
+    background-image: url("https://c1.wallpaperflare.com/preview/234/403/732/book-bird-cuckoo-background.jpgg");
+    background-size: cover;
+  }
+`;
 
 export default class Galery extends Component {
   state = {
@@ -304,96 +309,6 @@ export default class Galery extends Component {
                   <GaleryCards
                     desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
                     picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Norwich.jpg?w=600&ssl=1"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Roller.jpg?w=600&ssl=1"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Gloster.jpg?w=600&ssl=1"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Frill.jpg?w=600&ssl=1"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Lancashire.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Crest.jpg?w=600&ssl=1"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Lizard.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Spanish-Timbrado.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-American-Singer.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Rusia.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Waterslager.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Stafford.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Cinnamon.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Color-Bred.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Red-Factor.jpg?resize=600%2C400"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Kenari-Gibber-Italicus.jpg?resize=600%2C400"
                   />
                 </div>
               </div>
