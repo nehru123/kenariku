@@ -5,6 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Container = styled.nav`
+  margin-bottom: 100px;
   box-sizing: border-box;
   margin: 0;
   .jumbotron {
@@ -114,6 +115,21 @@ export default class Koleksi extends Component {
                   <div className="modal-body">
                     <form>
                       <div className="form-row">
+                        <div className="form-group col-md-12">
+                          <input
+                            type="file"
+                            multiple
+                            onChange={this.fileSelectedHandler}
+                          />
+                        </div>
+                        <div className="form-group col-md-12">
+                          <input
+                            type="file"
+                            multiple
+                            onChange={this.fileSelectedHandler}
+                          />
+                        </div>
+
                         <div className="form-group col-md-12">
                           <input
                             type="file"
