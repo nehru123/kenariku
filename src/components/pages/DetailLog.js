@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import api from "../utils/ServicesReport";
+import api from "../utils/ServicesBreeding";
+import api2 from "../utils/ServicesReport";
 
 const Container = styled.nav`
   .jumbotron {
@@ -21,7 +22,6 @@ const Container = styled.nav`
 
 export default class DetailLog extends Component {
   state = {
-    path: "http://localhost:5000/img/",
     nama: "",
     tanggal: "",
     jam: "",
@@ -37,33 +37,20 @@ export default class DetailLog extends Component {
     data: [],
     file: [],
     idUp: "",
-    id: 0,
-    image1: "",
-    image1Up: "",
-    image2: "",
-    image2Up: "",
-    image3: "",
-    image3Up: "",
-    message: null,
-    intervalIsSet: false,
-    idToDelete: null,
-    idToUpdate: null,
-    objectToUpdate: null
+    id: 0
   };
   componentDidMount = async () => {
-    this.setState({ isLoading: true });
-    await api.getAllReports().then(report => {
-      console.log(report);
-      this.setState({
-        file: report.data.data,
-        isLoading: false
-      });
-    });
-    await api.getAllBirds().then(bird => {
+    var query = window.location.search.substring(1);
+    await api.getBreedingById(query).then(bird => {
       console.log(bird);
       this.setState({
-        data: bird.data.data,
-        isLoading: false
+        file: bird.data.data
+      });
+    });
+    await api.getNameById(query).then(bird => {
+      console.log(bird);
+      this.setState({
+        data: bird.data.data
       });
     });
   };
@@ -81,17 +68,11 @@ export default class DetailLog extends Component {
   }
 
   getDataFromDb = () => {
-    api.getAllBirds().then(bird => {
+    var query = window.location.search.substring(1);
+    api.getBreedingById(query).then(bird => {
+      console.log(bird);
       this.setState({
-        data: bird.data.data
-      });
-    });
-  };
-
-  getReportFromDb = () => {
-    api.getAllReports().then(report => {
-      this.setState({
-        file: report.data.data
+        file: bird.data.data
       });
     });
   };
@@ -144,9 +125,9 @@ export default class DetailLog extends Component {
       status: this.state.status
     };
 
-    await api.insertReport(payload).then(res => {
+    await api2.insertReport(payload).then(res => {
       window.alert(`Report inserted successfully`);
-      this.getReportFromDb();
+      this.getDataFromDb();
     });
     //registerburung(burungData);
   };
@@ -162,9 +143,8 @@ export default class DetailLog extends Component {
       status: this.state.statusUp
     };
 
-    await api.updateReportById(this.state.idUp, payload).then(res => {
+    await api2.updateReportById(this.state.idUp, payload).then(res => {
       window.alert(`Report updated successfully`);
-      this.getReportFromDb();
     });
     //registerburung(burungData);
   };
@@ -172,7 +152,6 @@ export default class DetailLog extends Component {
     e.preventDefault();
     await api.deleteReportById(this.state.idUp).then(res => {
       window.alert(`Bird deleted successfully`);
-      this.getReportFromDb();
     });
   };
 
@@ -262,7 +241,12 @@ export default class DetailLog extends Component {
                             {data.length <= 0
                               ? "NO DB ENTRIES YET"
                               : data.map(dat => (
-                                  <option value={dat.name}>{dat.name}</option>
+                                  <option value={dat.betina}> {dat.betina} </option>
+                                ))}
+                                {data.length <= 0
+                              ? "NO DB ENTRIES YET"
+                              : data.map(dat => (
+                                  <option value={dat.jantan}> {dat.jantan} </option>
                                 ))}
                           </select>
                         </div>

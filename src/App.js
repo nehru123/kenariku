@@ -10,8 +10,9 @@ import Home from "./components/pages/Home";
 import Footer from "./components/layouts/Footer";
 import Detail from "./components/pages/Detail";
 import FarmManagement from "./components/pages/FarmManagement";
-import Galery from "./components/pages/Galery";
+import Gallery from "./components/pages/Gallery";
 import LihatBurung from "./components/pages/LihatBurung";
+import LihatBurung2 from "./components/pages/LihatBurung2";
 import Report from "./components/pages/Report";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
@@ -79,6 +80,9 @@ class App extends React.Component {
               <PrivateRoute exact path="/lihat" component={LihatBurung} />
             </Switch>
             <Switch>
+              <PrivateRoute exact path="/lihatRep" component={LihatBurung2} />
+            </Switch>
+            <Switch>
               <PrivateRoute exact path="/Report" component={Report} />
             </Switch>
             <Switch>
@@ -89,7 +93,7 @@ class App extends React.Component {
               />
             </Switch>
             <Switch>
-              <PrivateRoute exact path="/Galery" component={Galery} />
+              <PrivateRoute exact path="/Gallery" component={Gallery} />
               />
             </Switch>
             <Switch>

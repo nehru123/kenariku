@@ -6,14 +6,14 @@ import GaleryCards from "../layouts/GaleryCards";
 import { Howl } from "howler";
 import api from "../utils/ServicesGallery";
 
-const Contaner = styled.nav`
+const Container = styled.nav`
   .jumbotron {
-    background-image: url("https://c1.wallpaperflare.com/preview/234/403/732/book-bird-cuckoo-background.jpgg");
+    background-image: url("https://cityofcolumbiana.com/wp-content/uploads/media-gallery-banner.jpg");
     background-size: cover;
   }
 `;
 
-export default class Galery extends Component {
+export default class Gallery extends Component {
   state = {
     path: "http://localhost:5000/img/",
     name: "",
@@ -156,7 +156,7 @@ export default class Galery extends Component {
     const { data } = this.state;
     const { file } = this.state;
     return (
-      <React.Fragment>
+      <Container>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
             <h1 className="display-4">Gallery</h1>
@@ -289,7 +289,7 @@ export default class Galery extends Component {
           </div>
         </div>
 
-        <Contaner>
+        <div>
           <div class="album py-5 bg-light">
             <div class="container">
               <div class="row">
@@ -314,8 +314,8 @@ export default class Galery extends Component {
               </div>
             </div>
           </div>
-        </Contaner>
-      </React.Fragment>
+        </div>
+      </Container>
     );
   }
 }

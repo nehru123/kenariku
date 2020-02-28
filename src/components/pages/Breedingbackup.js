@@ -404,6 +404,71 @@ export default class Breeding extends Component {
                         </button>
                       </Link>
                     </span>
+                    <span>
+                      {" "}
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        onClick={e => this.setState({
+                          idUp:dat._id
+                        })}
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                      <div
+                        class="modal fade"
+                        id="exampleModal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5
+                                class="modal-title"
+                                id="exampleModalLabel"
+                              ></h5>
+                              <button
+                                type="button"
+                                class="close"
+                                name="idUp"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                                value={dat.idUp}
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div
+                              style={{ fontWeight: "bold" }}
+                              class="modal-body"
+                            >
+                              Yakin Menghapus Data ?
+                            </div>
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                              >
+                                Close
+                              </button>
+                            
+                              <button type="button" 
+                                onClick={e => this.deleteData(e)}
+                                data-dismiss="modal"
+                              class="btn btn-danger">
+                                Hapus
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </span>
                   </td>                 
                 </tr>
                 ))}

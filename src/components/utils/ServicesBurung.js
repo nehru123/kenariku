@@ -12,6 +12,7 @@ export const getAllBirds = () => api.get(`/getburung`)
 export const updateBirdById = (id, payload) => api.put(`/update/${id}`, payload)
 export const deleteBirdById = id => api.delete(`/delete/${id}`)
 export const getBirdById = id => api.get(`/find/${id}`)
+export const getBirdReportById = id => api.get(`/findReport/${id}`)
 export const upload = payload => apimg.post(`/upload`, payload)
 
 const apis = {
@@ -20,7 +21,8 @@ const apis = {
     updateBirdById,
     deleteBirdById,
     getBirdById,
-    upload
+    upload,
+    getBirdReportById
 }
 
 export default apis

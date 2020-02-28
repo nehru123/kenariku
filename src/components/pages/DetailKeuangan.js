@@ -321,10 +321,10 @@ export default class DetailKeuangan extends Component {
           </div>
         </div>
         <div className="container">
-          <div className="form-row" style={{ justifyContent: "space-between" }}>
-            <div className="form-group col-md-3">
-              {/* <label for="inputState">Laporan Penjualan Perbulan</label> */}
-              <select
+          {/* <div className="form-row" style={{ justifyContent: "space-between" }}>
+            <div className="form-group col-md-3"> */}
+          {/* <label for="inputState">Laporan Penjualan Perbulan</label> */}
+          {/* <select
                 type="text"
                 name="filter"
                 className="form-control"
@@ -342,15 +342,15 @@ export default class DetailKeuangan extends Component {
                 <option value="Juni">Juni</option>
                 <option value="Juli">July</option>
                 <option value="Agustus">Agustus</option>
-              </select>
-              {/* <button type="button" className="btn btn-success">
+              </select> */}
+          {/* <button type="button" className="btn btn-success">
                 Hitung Total Penjualan
               </button> */}
-            </div>
+          {/* </div> */}
 
-            <div className="form-group col-md-3">
+          {/* <div className="form-group col-md-3">
               {/* <label for="inputState"></label> */}
-              <select
+          {/* <select
                 type="text"
                 name="tahun"
                 className="form-control"
@@ -369,7 +369,7 @@ export default class DetailKeuangan extends Component {
               <h5 style={{}}>Total Penjualan Bulan {filter} Adalah</h5>
               <h5 style={{ fontWeight: "bold" }}>Rp.{jumlah},00</h5>
             </div>
-          </div>
+          </div> */}
           <div className="input-group ">
             <input
               type="text"
@@ -385,7 +385,7 @@ export default class DetailKeuangan extends Component {
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Bulan</th>
+                <th scope="col"></th>
                 <th scope="col">Keterangan</th>
                 <th scope="col">Nominal</th>
                 <th scope="col">Jenis</th>
@@ -400,13 +400,13 @@ export default class DetailKeuangan extends Component {
                       (
                         <tr>
                           <td>
-                            {" " + months[d.getMonth()] + " " + d.getFullYear()}
+                            {/* {" " + months[d.getMonth()] + " " + d.getFullYear()} */}
                           </td>
                           <td>Penjualan Burung</td>
                           <td>{fil.harga}</td>
                           <td>Pemasukan</td>
                           <td>
-                            <button className="btn btn-success">Detail</button>
+                            {/* <button className="btn btn-success">Detail</button> */}
                           </td>
                         </tr>
                       )

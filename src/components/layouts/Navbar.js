@@ -74,7 +74,7 @@ class Navbar extends React.Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/Galery" className="card-link">
+                  <Link to="/Gallery" className="card-link">
                     <a className="nav-link">Galery</a>
                   </Link>
                 </li>

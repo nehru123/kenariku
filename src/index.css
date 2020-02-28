@@ -1,6 +1,9 @@
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins";
+  font-size: 13px;
+  line-height: 1.9;
+  color: #666;
 }
 
 code {
