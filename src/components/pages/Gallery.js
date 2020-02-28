@@ -8,7 +8,7 @@ import api from "../utils/ServicesGallery";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("https://cityofcolumbiana.com/wp-content/uploads/media-gallery-banner.jpg");
+    /* background-image: url("https://cityofcolumbiana.com/wp-content/uploads/media-gallery-banner.jpg"); */
     background-size: cover;
   }
 `;
@@ -248,8 +248,19 @@ export default class Gallery extends Component {
                       </div>
 
                       <div className="form-row">
+                        <div class="custom-file mb-3">
+                          <input
+                            type="file"
+                            class="custom-file-input"
+                            id="customFile"
+                            name="filename"
+                          />
+                          <label class="custom-file-label" for="customFile">
+                            Choose audio file
+                          </label>
+                        </div>
                         <div className="form-group col-md-3">
-                          <label for="inputCity">Gambar Depan</label>
+                          <label for="inputCity">Gambar Burung</label>
                           <input type="file" id="foto" />
                           <div class="form-group">
                             <button

@@ -285,7 +285,7 @@ export default class FarmManagement extends Component {
               type="button"
               className="btn btn-success"
               data-toggle="modal"
-              data-target=".bd-example-modal-lg"
+              data-target=".bd-example-modal-lg-register"
             >
               Register Burung
             </button>
@@ -294,13 +294,13 @@ export default class FarmManagement extends Component {
 
             <form id="addForm">
               <div
-                className="modal fade bd-example-modal-lg"
+                className="modal fade bd-example-modal-lg-register"
                 tabindex="-1"
                 role="dialog"
                 aria-labelledby="myLargeModalLabel"
                 aria-hidden="true"
               >
-                <div className="modal-dialog modal-lg" role="document">
+                <div className="modal-dialog modal-lg-register" role="document">
                   <div className="modal-content" closeModal={this.closeModal}>
                     <div className="modal-header">
                       <h5 className="modal-title" id="exampleModalLabel">

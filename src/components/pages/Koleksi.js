@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -7,7 +8,6 @@ const Container = styled.nav`
   box-sizing: border-box;
   margin: 0;
   .jumbotron {
-    background-image: url("https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-financial-management-banner-background-design-image_188731.jpg");
     background-size: cover;
   }
   .row {
@@ -49,9 +49,26 @@ const Container = styled.nav`
       max-width: 100%;
     }
   }
+  .videoCover {
+    box-shadow: 5px 0px 18px #888888;
+    border-radius: 100px;
+    border-radius: 15px;
+    size: 100vh;
+    width: 800px;
+    height: 360px;
+    background-color: grey;
+    margin: auto;
+  }
 `;
 
 export default class Koleksi extends Component {
+  state = {
+    files: []
+  };
+
+  fileSelectedHandler = e => {
+    this.setState({ files: [...this.state.files, ...e.target.files] });
+  };
   render() {
     return (
       <Container>
@@ -63,13 +80,78 @@ export default class Koleksi extends Component {
               contents, the creator, etc. Make it short and sweet, but not too
               short so folks don’t simply skip over it entirely.
             </p>
-            <p>
-              <a href="#" class="btn btn-success my-2">
-                Add Collection
-              </a>
-            </p>
+            <button
+              type="button"
+              className="btn btn-success"
+              data-toggle="modal"
+              data-target=".bd-example-modal-lg"
+            >
+              Tambah Gallery
+            </button>
+
+            <div
+              className="modal fade bd-example-modal-lg"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="myLargeModalLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-lg" role="document">
+                <div className="modal-content" closeModal={this.closeModal}>
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="exampleModalLabel">
+                      Gallery Burung
+                    </h5>
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <form>
+                      <div className="form-row">
+                        <div className="form-group col-md-12">
+                          <input
+                            type="file"
+                            multiple
+                            onChange={this.fileSelectedHandler}
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
+        <section>
+          <h3 style={{ textAlign: "center", margin: 30 }}>Videos</h3>
+          <div className="videoCover"></div>
+        </section>
+
+        <div style={{ margin: 50, textAlign: "center" }} id="myBtnContainer">
+          <button class="btn active" onclick="filterSelection('all')">
+            Show all
+          </button>
+          <button class="btn" onclick="filterSelection('album')">
+            {" "}
+            Album
+          </button>
+          <button class="btn" onclick="filterSelection('event')">
+            {" "}
+            Event
+          </button>
+
+          <button class="btn" onclick="filterSelection('videos')">
+            {" "}
+            Videos
+          </button>
+        </div>
         <div
           class="row"
           style={{ margin: "auto", width: "100%", justifyContent: "center" }}
@@ -87,14 +169,6 @@ export default class Koleksi extends Component {
               src="https://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/newseventsimage_1557320321101_mainnews2012_x1.jpg"
               style={{ width: "100%" }}
             />
-            <img
-              src="https://coastallandtrust.org/wp-content/uploads/2019/11/Prothonotary-Warbler-Dr.-Jim-Parnell-credit.jpg"
-              style={{ width: "100%" }}
-            />
-            <img
-              src="https://scx1.b-cdn.net/csz/news/800/2019/mostnativebi.jpg"
-              style={{ width: "100%" }}
-            />
           </div>
           <div class="column">
             <img
@@ -106,18 +180,6 @@ export default class Koleksi extends Component {
               src="https://ontariospca.ca/wp-content/uploads/2019/03/Living-with-wildlife-birds-544x600.jpg"
               style={{ width: "100%" }}
             />
-            <img
-              src="https://img.jakpost.net/c/2019/12/20/2019_12_20_83809_1576815251._large.jpg"
-              style={{ width: "100%" }}
-            />
-            <img
-              src="https://www.nhm.ac.uk/content/dam/nhmwww/discover/common-tailorbirds/Common-tailorbird-full-width.jpg.thumb.1920.1920.png"
-              style={{ width: "100%" }}
-            />
-            <img
-              src="https://media.phillyvoice.com/media/images/bird-in-spinach.2e16d0ba.fill-735x490.jpg"
-              style={{ width: "100%" }}
-            />
           </div>
           <div class="column">
             <img
@@ -130,16 +192,6 @@ export default class Koleksi extends Component {
             />
             <img
               src="https://img.jakpost.net/c/2019/12/20/2019_12_20_83809_1576815251._large.jpg"
-              style={{ width: "100%" }}
-            />
-
-            <img
-              src="https://www.denverpost.com/wp-content/uploads/2019/09/Billions_Fewer_Birds_24565.jpg?w=526iospca.ca/wp-content/uploads/2019/03/Living-with-wildlife-birds-544x600.jpg"
-              style={{ width: "100%" }}
-            />
-
-            <img
-              src="https://www.flagstaff365.com/wp-content/uploads/sites/www.flagstaff365.com/images/2019/05/bird.jpg"
               style={{ width: "100%" }}
             />
           </div>

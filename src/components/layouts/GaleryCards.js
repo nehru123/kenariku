@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Container = styled.div``;
+const Container = styled.div`
+  box-shadow: 5px 0px 18px #888888;
+  border-radius: 100px;
+  border-radius: 15px;
+`;
 
 export default class GaleryCards extends Component {
   render(props) {
