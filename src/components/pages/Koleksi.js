@@ -8,6 +8,7 @@ const Container = styled.nav`
   margin-bottom: 100px;
   box-sizing: border-box;
   margin: 0;
+
   .jumbotron {
     background-size: cover;
   }
@@ -114,29 +115,56 @@ export default class Koleksi extends Component {
                   </div>
                   <div className="modal-body">
                     <form>
-                      <div className="form-row">
-                        <div className="form-group col-md-12">
-                          <input
-                            type="file"
-                            multiple
-                            onChange={this.fileSelectedHandler}
-                          />
+                      <div
+                        style={{ justifyContent: "center" }}
+                        className="form-row"
+                      >
+                        <div className="form-group col-md-3">
+                          <label for="inputCity">Gambar Burung</label>
+                          <input type="file" id="foto" />
+                          <span>
+                            <button
+                              type="button"
+                              name="foto"
+                              class="btn btn-primary"
+                              onClick={e => this.uploadImage(e)}
+                            >
+                              Upload
+                            </button>
+                          </span>
                         </div>
-                        <div className="form-group col-md-12">
-                          <input
-                            type="file"
-                            multiple
-                            onChange={this.fileSelectedHandler}
-                          />
+                        <div className="form-group col-md-3">
+                          <label for="inputCity">Video Burung</label>
+                          <input type="file" id="foto" />
+                          <span>
+                            <button
+                              type="button"
+                              name="foto"
+                              class="btn btn-primary"
+                              onClick={e => this.uploadImage(e)}
+                            >
+                              Upload
+                            </button>
+                          </span>
                         </div>
+                      </div>
 
-                        <div className="form-group col-md-12">
-                          <input
-                            type="file"
-                            multiple
-                            onChange={this.fileSelectedHandler}
-                          />
-                        </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="submit"
+                          data-dismiss="modal"
+                          className="btn btn-success"
+                          onClick={e => this.add(e)}
+                        >
+                          Tambahkan
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -145,29 +173,12 @@ export default class Koleksi extends Component {
             </div>
           </div>
         </section>
+
         <section>
           <h3 style={{ textAlign: "center", margin: 30 }}>Videos</h3>
           <div className="videoCover"></div>
         </section>
-
-        <div style={{ margin: 50, textAlign: "center" }} id="myBtnContainer">
-          <button class="btn active" onclick="filterSelection('all')">
-            Show all
-          </button>
-          <button class="btn" onclick="filterSelection('album')">
-            {" "}
-            Album
-          </button>
-          <button class="btn" onclick="filterSelection('event')">
-            {" "}
-            Event
-          </button>
-
-          <button class="btn" onclick="filterSelection('videos')">
-            {" "}
-            Videos
-          </button>
-        </div>
+        <h3 style={{ textAlign: "center", margin: 30 }}>Album </h3>
         <div
           class="row"
           style={{ margin: "auto", width: "100%", justifyContent: "center" }}

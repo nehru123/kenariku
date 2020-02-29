@@ -22,6 +22,7 @@ import LaporanKeuangan from "./components/pages/LaporanKeuangan";
 import DetailKeuangan from "./components/pages/DetailKeuangan";
 import Breeding from "./components/pages/Breeding";
 import DetailLog from "./components/pages/DetailLog";
+import DetailParent from "./components/pages/DetailParent";
 
 // utils
 import setAuthToken from "./components/utils/setAuthToken";
@@ -116,6 +117,13 @@ class App extends React.Component {
             </Switch>
             <Switch>
               <PrivateRoute exact path="/DetailLog" component={DetailLog} />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/DetailParent"
+                component={DetailParent}
+              />
             </Switch>
           </Router>
         </Provider>

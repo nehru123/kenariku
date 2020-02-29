@@ -18,6 +18,10 @@ const Container = styled.nav`
   .action {
     text-align: end;
   }
+  .Myrecord {
+    display: flex;
+    justify-content: flex-start;
+  }
 `;
 
 export default class DetailLog extends Component {
@@ -192,13 +196,13 @@ export default class DetailLog extends Component {
             </button>
             <span>
               {" "}
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-primary"
                 onClick={e => this.print(e)}
               >
                 Download Log
-              </button>
+              </button> */}
             </span>
 
             <div
@@ -227,30 +231,25 @@ export default class DetailLog extends Component {
                   <div className="modal-body">
                     <form>
                       <div className="form-row">
-                        <div className="form-group col-md-4">
-                          <label for="inputName">Nama</label>
+                        <div className="form-group col-md-6">
+                          <label for="inputUmur">Status</label>
                           <select
                             type="text"
-                            name="nama"
+                            name="status"
                             className="form-control"
-                            id="inputState"
+                            id="inputCity"
                             onChange={e => this.onChange(e)}
-                            value={this.state.nama}
+                            value={this.state.status}
                           >
                             <option selected>Choose</option>
-                            {data.length <= 0
-                              ? "NO DB ENTRIES YET"
-                              : data.map(dat => (
-                                  <option value={dat.betina}> {dat.betina} </option>
-                                ))}
-                                {data.length <= 0
-                              ? "NO DB ENTRIES YET"
-                              : data.map(dat => (
-                                  <option value={dat.jantan}> {dat.jantan} </option>
-                                ))}
+                            <option value="Normal">Breeding Activity</option>
+                            <option value="Sakit">Kawin</option>
+                            <option value="Pemulihan">Bertelur</option>
+                            <option value="Kritis">Perkembangan</option>
                           </select>
                         </div>
-                        <div className="form-group col-md-4">
+
+                        <div className="form-group col-md-6">
                           <label for="inputType">Tanggal</label>
                           <input
                             type="date"
@@ -260,7 +259,7 @@ export default class DetailLog extends Component {
                             value={this.state.tanggal}
                           ></input>
                         </div>
-                        <div className="form-group col-md-4">
+                        <div className="form-group col-md-12">
                           <label for="inputType">Jam</label>
                           <input
                             type="time"
@@ -282,37 +281,6 @@ export default class DetailLog extends Component {
                           onChange={e => this.onChange(e)}
                           value={this.state.log}
                         ></textarea>
-                      </div>
-
-                      <div className="form-row">
-                        <div className="form-group col-md-6">
-                          <label for="inputCity">Pakan</label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="inputCity"
-                            name="pakan"
-                            onChange={e => this.onChange(e)}
-                            value={this.state.pakan}
-                          ></input>
-                        </div>
-                        <div className="form-group col-md-6">
-                          <label for="inputUmur">Status</label>
-                          <select
-                            type="text"
-                            name="status"
-                            className="form-control"
-                            id="inputCity"
-                            onChange={e => this.onChange(e)}
-                            value={this.state.status}
-                          >
-                            <option selected>Choose</option>
-                            <option value="Normal">Normal</option>
-                            <option value="Sakit">Sakit</option>
-                            <option value="Pemulihan">Pemulihan</option>
-                            <option value="Kritis">Kritis</option>
-                          </select>
-                        </div>
                       </div>
 
                       <div className="modal-footer">
@@ -340,7 +308,7 @@ export default class DetailLog extends Component {
         </div>
         <div>
           <div className="container">
-            <div className="input-group ">
+            {/* <div className="input-group ">
               <div className="input-group mb-3">
                 <input
                   type="text"
@@ -352,18 +320,23 @@ export default class DetailLog extends Component {
                   aria-describedby="basic-addon2"
                 ></input>
               </div>
+            </div> */}
+            <h3>Batch 1</h3>
+            <div className="Myrecord">
+              <p style={{ margin: 10 }}>Id Jantan :F-11</p>
+              <p style={{ margin: 10 }}>Id Betina :M-12</p>
             </div>
 
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Nama</th>
-                  <th scope="col">Tanggal</th>
-                  <th scope="col">Jam</th>
-                  <th scope="col">Log</th>
-                  <th scope="col">Pakan</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Action</th>
+                  <th scope="col">Log</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Jam</th>
+                  <th scope="col">Tanggal</th>
                 </tr>
               </thead>
               <tbody id="listReports">
@@ -374,19 +347,18 @@ export default class DetailLog extends Component {
                         (d = new Date(fil.tanggal)),
                         (
                           <tr>
-                            <th scope="row">{fil.nama}</th>
+                            <th scope="row">{fil.status}</th>
+                            <td>{fil.log}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{fil.jam}</td>
                             <td>
                               {d.getDate() +
                                 " " +
                                 months[d.getMonth()] +
                                 " " +
                                 d.getFullYear()}
-                            </td>
-                            <td>{fil.jam}</td>
-                            <td>{fil.log}</td>
-                            <td>{fil.pakan}</td>
-                            <td>{fil.status}</td>
-                            <td>
                               {/* <button
                                 type="button"
                                 className="btn btn-success"

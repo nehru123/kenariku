@@ -71,8 +71,16 @@ const Container = styled.nav`
     text-transform: capitalize;
     opacity: 0.5;
   }
+  .MyButton {
+    text-align: right;
+    margin: 15px;
+  }
+  .Myrecord {
+    display: flex;
+    justify-content: flex-start;
+  }
 `;
-export default class Breeding extends Component {
+export default class DetailParent extends Component {
   state = {
     path: "http://localhost:5000/img/",
     idbetina: "",
@@ -234,18 +242,10 @@ export default class Breeding extends Component {
       <Container>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1 className="display-4">Breeding Record</h1>
-            <p className="lead">
-              Breeding digunakan untuk memonitoring proses ternak burung kenari.
-            </p>
-            <button
-              type="button"
-              className="btn btn-success"
-              data-toggle="modal"
-              data-target=".bd-example-modal-lg"
-            >
-              Tambah
-            </button>
+            <h1 style={{ textAlign: "center" }} className="display-4">
+              Detail Parent
+            </h1>
+            <p className="lead"></p>
 
             <form id="addForm">
               <div
@@ -354,8 +354,6 @@ export default class Breeding extends Component {
         </div>
         <div>
           <div className="container">
-            <h2>List</h2>
-
             <div className="input-group mb-3">
               <input
                 type="text"
@@ -367,16 +365,88 @@ export default class Breeding extends Component {
                 aria-describedby="basic-addon2"
               ></input>
             </div>
+            <div className="MyButton">
+              {/* <button
+                type="button"
+                className="btn btn-success"
+                data-toggle="modal"
+                data-target=".bd-example-modal-lg"
+              >
+                Batch Baru
+              </button>
+            </div> */}
+              <button
+                type="button"
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#exampleModalLong"
+              >
+                Add New Batch
+              </button>
+
+              <div
+                class="modal fade"
+                id="exampleModalLong"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLongTitle"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                        Warning
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you Sure ?</p>
+                      Mas.. nanti kalo pas klik Add New Batch di muncul modal
+                      ini .. kalo yes nanti ada pesan eror jika ada batch yang
+                      belum selesai / alias on progres tp kalo dah udah finish
+                      jadi nanti bisa buat batch yang ke sekian(seumpama setelah
+                      batch 1 adalah batch 2)
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        No
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Yes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h3>Parent 1</h3>
+            <div className="Myrecord">
+              <p style={{ margin: 10 }}>Id Jantan :F-11</p>
+              <p style={{ margin: 10 }}>Id Betina :M-12</p>
+            </div>
 
             {/* Table Bird */}
             <table className="table">
               <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th scope="col">Foto Betina</th>
-                  <th scope="col">ID Betina</th>
-                  <th scope="col">Foto jantan</th>
-                  <th scope="col">ID Jantan</th>
+                  <th scope="col"> Status</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -387,33 +457,25 @@ export default class Breeding extends Component {
                       <tr>
                         <td>
                           {" "}
-                          <h5>Parent 1</h5>
+                          <p>Batch 1</p>
                         </td>
                         <td>
-                          <img
-                            src={this.state.path + dat.imagebetina}
-                            width="50px"
-                            height="50px"
-                          ></img>
+                          <p style={{ fontWeight: "bold" }}>On Progres</p>
                         </td>
-                        <td>{dat.betina}</td>
+                        <td></td>
 
-                        <td>
-                          <img
-                            src={this.state.path + dat.imagejantan}
-                            width="50px"
-                            height="50px"
-                          ></img>
-                        </td>
-                        <td>{dat.jantan}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
                         <td>
                           <span>
                             {" "}
                             <Link
-                              to={"/DetailParent?" + dat._id}
+                              to={"/DetailLog?" + dat._id}
                               classNameName="card-link"
                             >
-                              <button type="button" className="btn btn-success">
+                              <button type="button" className="btn btn-primary">
                                 Lihat Detail
                               </button>
                             </Link>
