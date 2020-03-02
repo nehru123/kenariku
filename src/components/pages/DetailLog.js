@@ -196,13 +196,60 @@ export default class DetailLog extends Component {
             </button>
             <span>
               {" "}
-              {/* <button
+              <button
                 type="button"
-                className="btn btn-primary"
-                onClick={e => this.print(e)}
+                class="btn btn-danger"
+                data-toggle="modal"
+                data-target="#exampleModalLong"
               >
-                Download Log
-              </button> */}
+                Akhiri Batch
+              </button>
+              <div
+                class="modal fade"
+                id="exampleModalLong"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalLongTitle"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">
+                        Warning
+                      </h5>
+                      <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you Sure ?</p>
+                      Mas.. nanti kalo pas klik Add New Batch di muncul modal
+                      ini .. kalo yes nanti ada pesan eror jika ada batch yang
+                      belum selesai / alias on progres tp kalo dah udah finish
+                      jadi nanti bisa buat batch yang ke sekian(seumpama setelah
+                      batch 1 adalah batch 2)
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        No
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Yes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </span>
 
             <div

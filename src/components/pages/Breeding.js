@@ -244,6 +244,7 @@ export default class Breeding extends Component {
               data-toggle="modal"
               data-target=".bd-example-modal-lg"
             >
+              <i class="fa fa-plus"></i>
               Tambah
             </button>
 

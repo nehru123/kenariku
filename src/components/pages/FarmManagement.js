@@ -329,7 +329,7 @@ export default class FarmManagement extends Component {
                             ></input>
                           </div>
                           <div className="form-group col-md-6">
-                            <label for="inputCity">Jenis</label>
+                            <label for="inputCity">Jenis Kenari </label>
                             <select 
                               type="text"
                               name="jenis"
