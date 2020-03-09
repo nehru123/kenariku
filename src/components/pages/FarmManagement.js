@@ -556,7 +556,7 @@ export default class FarmManagement extends Component {
                             <label for="inputUmur">Birthday</label>
                             <input
                               name="umur"
-                              type="number"
+                              type="date"
                               className="form-control"
                               id="inputZip"
                               onChange={e => this.onChange(e)}
@@ -839,7 +839,7 @@ export default class FarmManagement extends Component {
                                 <div className="form-group col-md-3">
                                   <label for="inputUmur">Birthday</label>
                                   <input
-                                    type="number"
+                                    type="date"
                                     name="umurUp"
                                     className="form-control"
                                     id="inputZip"

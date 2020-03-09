@@ -312,6 +312,24 @@ export default class DetailLog extends Component {
                           ></input>
                         </div>
                       </div>
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label>Born</label>
+                          <input
+                            name="born"
+                            type="text"
+                            className="form-control"
+                          ></input>
+                        </div>
+                        <div className="form-group col-md-6">
+                          <label>Die</label>
+                          <input
+                            name="die"
+                            type="text"
+                            className="form-control"
+                          ></input>
+                        </div>
+                      </div>
 
                       <div className="form-group">
                         <label for="exampleFormControlTextarea1">Log</label>

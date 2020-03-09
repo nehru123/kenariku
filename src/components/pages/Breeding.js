@@ -238,7 +238,7 @@ export default class Breeding extends Component {
             <p className="lead">
               Breeding digunakan untuk memonitoring proses ternak burung kenari.
             </p>
-            <button
+            {/* <button
               type="button"
               className="btn btn-success"
               data-toggle="modal"
@@ -246,7 +246,7 @@ export default class Breeding extends Component {
             >
               <i class="fa fa-plus "></i>
               Tambah
-            </button>
+            </button> */}
 
             <form id="addForm">
               <div
