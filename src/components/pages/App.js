@@ -11,7 +11,6 @@ import Footer from "./components/layouts/Footer";
 import Detail from "./components/pages/Detail";
 import FarmManagement from "./components/pages/FarmManagement";
 import Gallery from "./components/pages/Gallery";
-import DetailTrans from "./components/pages/DetailTrans";
 import LihatBurung from "./components/pages/LihatBurung";
 import LihatBurung2 from "./components/pages/LihatBurung2";
 import Report from "./components/pages/Report";
@@ -125,9 +124,6 @@ class App extends React.Component {
                 path="/DetailParent"
                 component={DetailParent}
               />
-            </Switch>
-            <Switch>
-              <PrivateRoute exact path="/lihatTrans" component={DetailTrans} />
             </Switch>
           </Router>
         </Provider>

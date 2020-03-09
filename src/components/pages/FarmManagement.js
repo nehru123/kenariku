@@ -77,12 +77,13 @@ export default class FarmManagement extends Component {
     path: "http://localhost:5000/img/",
     name: "",
     nameUp:"",
-    deskirpsiUp:"",
+    deskripsiUp:"",
     jenisUp:"",
     warnaUp:"",
     jenis_kelaminUp: "",
     umurUp:"",
     hargaUp: "",
+    peternak:"",
     statusUp: "",
     jenis: "",
     warna: "",
@@ -188,6 +189,7 @@ export default class FarmManagement extends Component {
       deskripsi: this.state.deskripsi,
       jenis: this.state.jenis,
       warna: this.state.warna,
+    
       jenis_kelamin: this.state.jenis_kelamin,
       umur: this.state.umur,
       harga: this.state.harga,
@@ -289,9 +291,147 @@ export default class FarmManagement extends Component {
             >
               Register Burung
             </button>
+            { "          "}
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-toggle="modal"
+              data-target=".bd-example-modal-lg-parent"
+            >
+              Register Parent
+            </button>
+            
+        
+{/* tambah parent */}
+            <form id="addForm">
+              <div
+                className="modal fade bd-example-modal-lg-parent"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myLargeModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog modal-lg-parent" role="document">
+                  <div className="modal-content" closeModal={this.closeModal}>
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">
+                        Register Parent
+                      </h5>
+                      <button
+                        type="button"
+                        className="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <form>
+                        <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <label for="inputCity">Ring Jantan </label>
+                            <select 
+                              type="text"
+                              name="jenis"
+                              className="form-control"
+                              id="inputCity"
+                              onChange={e => this.onChange(e)}
+                              value={this.state.jenis}
+                              >
+                              <option selected>Choose</option>
+                              <option value="Kenari Lokal"> Kenari Lokal</option>
+                              <option value="Kenari Lokal"> Kenari Loper</option>
+                              <option value="Kenari Yorkshire">Kenari Yorkshire</option>
+                              <option value=" Kenari Border">Kenari Border</option>
+                              <option value="Kenari AF">Kenari AF</option>
+                              <option value="Kenari F1">Kenari F1</option>
+                              <option value="Kenari F2">Kenari F2</option>
+                              <option value="Kenari F3">Kenari F3</option>
+                              <option value="Kenari SF">Kenari SF</option>
+
+                        
+                              <option value="Kenari Gloster">Kenari Gloster</option>
+                              <option value="Kenari Melayu">Kenari Melayu</option>
+                              <option value="Kenari Norwich">Kenari Norwich</option>
+                            
+                            </select>
+                          </div>
+                          
+                          <div className="form-group col-md-6">
+                            <label for="inputCity">Ring Betina </label>
+                            <select 
+                              type="text"
+                              name="jenis"
+                              className="form-control"
+                              id="inputCity"
+                              onChange={e => this.onChange(e)}
+                              value={this.state.jenis}
+                              >
+                              <option selected>Choose</option>
+                              <option value="Kenari Lokal"> Kenari Lokal</option>
+                              <option value="Kenari Lokal"> Kenari Loper</option>
+                              <option value="Kenari Yorkshire">Kenari Yorkshire</option>
+                              <option value=" Kenari Border">Kenari Border</option>
+                              <option value="Kenari AF">Kenari AF</option>
+                              <option value="Kenari F1">Kenari F1</option>
+                              <option value="Kenari F2">Kenari F2</option>
+                              <option value="Kenari F3">Kenari F3</option>
+                              <option value="Kenari SF">Kenari SF</option>
+
+                        
+                              <option value="Kenari Gloster">Kenari Gloster</option>
+                              <option value="Kenari Melayu">Kenari Melayu</option>
+                              <option value="Kenari Norwich">Kenari Norwich</option>
+                            
+                            </select>
+                          </div>
+                          
+                          </div>
+
+                        
+                        {/* <div className="form-row" style={{justifyContent:"space-between"}}>
+                          <div className="form-group col-md-3">
+                            <label for="inputCity"></label>
+                            <input type="file" id="image1" onChange={e => this.preview(e)}/>
+                            <img id="outputimage1" width="100px" height="100px"/>
+                            <div class="form-group">
+                              <button type="button" name="image1" class="btn btn-primary" onClick={e => this.uploadImage(e)}>Upload</button>
+                            </div>
+                          </div>
+                       
+                          <div className="form-group col-md-3">
+                            <label for="inputCity"></label>
+                            <input type="file" id="image3" onChange={e => this.preview(e)}/>
+                            <img id="outputimage3" width="100px" height="100px"/>
+                            <div class="form-group">
+                              <button type="button" name="image3" class="btn btn-primary" onClick={e => this.uploadImage(e)}>Upload</button>
+                            </div>
+                          </div>
+                        </div> */}
+                    
+
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button type="submit" className="btn btn-success" onClick={e => this.addBird(e)}>
+                            Tambahkan
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
 
         
-
+{/* tambah burung */}
             <form id="addForm">
               <div
                 className="modal fade bd-example-modal-lg-register"
@@ -339,19 +479,35 @@ export default class FarmManagement extends Component {
                               value={this.state.jenis}
                               >
                               <option selected>Choose</option>
-                              <option value="Kenari Melayu">Kenari Melayu</option>
+                              <option value="Kenari Lokal"> Kenari Lokal</option>
+                              <option value="Kenari Lokal"> Kenari Loper</option>
                               <option value="Kenari Yorkshire">Kenari Yorkshire</option>
-                              <option value="Kenari Waterslager">Kenari Waterslager</option>
-                              <option value="Kenari Spanish Timbrado">Kenari Spanish Timbrado</option>
                               <option value=" Kenari Border">Kenari Border</option>
+                              <option value="Kenari AF">Kenari AF</option>
+                              <option value="Kenari F1">Kenari F1</option>
+                              <option value="Kenari F2">Kenari F2</option>
+                              <option value="Kenari F3">Kenari F3</option>
+                              <option value="Kenari SF">Kenari SF</option>
+
+                        
                               <option value="Kenari Gloster">Kenari Gloster</option>
                               <option value="Kenari Melayu">Kenari Melayu</option>
                               <option value="Kenari Norwich">Kenari Norwich</option>
                             
                             </select>
                           </div>
+                          <div className="form-group col-md-12">
+                            <label for="inputName">Peternak</label>
+                            <input
+                              type="text"
+                              name="peternak"
+                              className="form-control"
+                              onChange={e => this.onChange(e)}
+                        
+                            ></input>
                           </div>
-
+                          </div>
+                       
                         <div className="form-group">
                           <label for="deskripsi">
                             Deskripsi
@@ -365,6 +521,8 @@ export default class FarmManagement extends Component {
                             required
                           ></textarea>
                         </div>
+                      
+                    
 
                         <div className="form-row">
                           <div className="form-group col-md-3">
@@ -395,7 +553,7 @@ export default class FarmManagement extends Component {
                           </div>
 
                           <div className="form-group col-md-3">
-                            <label for="inputUmur">Umur (Bulan)</label>
+                            <label for="inputUmur">Birthday</label>
                             <input
                               name="umur"
                               type="number"
@@ -515,7 +673,7 @@ export default class FarmManagement extends Component {
             <thead>
                 <tr>
                   <th scope="col"></th>
-                  <th scope="col">Ring ID</th>
+                  <th scope="col"> Ring ID</th>
                   <th scope="col">Jenis</th>
                   <th scope="col">Warna</th>
                   <th scope="col">Umur</th>
@@ -557,7 +715,7 @@ export default class FarmManagement extends Component {
                         warnaUp:dat.warna,
                         umurUp:dat.umur,
                         jenis_kelaminUp:dat.jenis_kelamin,
-                        deskirpsiUp:dat.deskripsi,
+                        deskripsiUp:dat.deskripsi,
                         idUp:dat._id,
                         hargaUp:dat.harga,
                         statusUp:dat.status,
@@ -571,7 +729,7 @@ export default class FarmManagement extends Component {
                       Edit
                     </button>
                     <div
-                      className="modal fade bd-example-modal-lg"
+                      className="modal fade bd-example-modal-lg-Up"
                       tabindex="-1"
                       role="dialog"
                       id="updatelah"
@@ -579,7 +737,7 @@ export default class FarmManagement extends Component {
                       aria-hidden="true"
                     >
                       {/* edit */}
-                      <div className="modal-dialog modal-lg" role="document">
+                      <div className="modal-dialog modal-lg-Up" role="document">
                         <div className="modal-content">
                           <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">
@@ -598,7 +756,7 @@ export default class FarmManagement extends Component {
                             <form >
                               <div className="form-row">
                                 <div className="form-group col-md-6">
-                                  <label for="inputName"> Ring ID</label>
+                                  <label for="inputName"> RING ID</label>
                                   <input
                                     type="name"
                                     name="nameUp"
@@ -618,11 +776,17 @@ export default class FarmManagement extends Component {
                               value={this.state.jenisUp}
                               >
                               <option selected>Choose</option>
-                              <option value="Kenari Melayu">Kenari Melayu</option>
+                              <option value="Kenari Lokal"> Kenari Lokal</option>
+                              <option value="Kenari Lokal"> Kenari Loper</option>
                               <option value="Kenari Yorkshire">Kenari Yorkshire</option>
-                              <option value="Kenari Waterslager">Kenari Waterslager</option>
-                              <option value="Kenari Spanish Timbrado">Kenari Spanish Timbrado</option>
                               <option value=" Kenari Border">Kenari Border</option>
+                              <option value="Kenari AF">Kenari AF</option>
+                              <option value="Kenari F1">Kenari F1</option>
+                              <option value="Kenari F2">Kenari F2</option>
+                              <option value="Kenari F3">Kenari F3</option>
+                              <option value="Kenari SF">Kenari SF</option>
+
+                        
                               <option value="Kenari Gloster">Kenari Gloster</option>
                               <option value="Kenari Melayu">Kenari Melayu</option>
                               <option value="Kenari Norwich">Kenari Norwich</option>
@@ -641,7 +805,7 @@ export default class FarmManagement extends Component {
                                   rows="3"
                                   name="deskripsiUp"
                                   onChange={e => this.onChange(e)}
-                                  value={this.state.deskripsiiUp}
+                                  value={this.state.deskripsiU}
                                 ></textarea>
                               </div>
 
@@ -673,7 +837,7 @@ export default class FarmManagement extends Component {
                                   </select>
                                 </div>
                                 <div className="form-group col-md-3">
-                                  <label for="inputUmur">Umur (Bulan)</label>
+                                  <label for="inputUmur">Birthday</label>
                                   <input
                                     type="number"
                                     name="umurUp"
@@ -696,7 +860,8 @@ export default class FarmManagement extends Component {
                                 </div>
                               </div>
                             
-                              <div className="form-row">
+                              <div className="form-row" style={{justifyContent:"space-between"}}>
+ 
                                 <div className="form-group col-md-3">
                                   <label for="Image1Up"></label>
                                   <input type="file" id="image1Up" onChange={e => this.preview(e)}/>

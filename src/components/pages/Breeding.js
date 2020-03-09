@@ -244,7 +244,7 @@ export default class Breeding extends Component {
               data-toggle="modal"
               data-target=".bd-example-modal-lg"
             >
-              <i class="fa fa-plus"></i>
+              <i class="fa fa-plus "></i>
               Tambah
             </button>
 
@@ -274,7 +274,7 @@ export default class Breeding extends Component {
                     <div className="modal-body">
                       <form>
                         <div className="form-row">
-                          <div className="form-group col-md-12">
+                          {/* <div className="form-group col-md-12">
                             <label for="inputCity">Id Betina</label>
                             <select
                               type="text"
@@ -292,9 +292,34 @@ export default class Breeding extends Component {
                                     <option value={bet.name}>{bet.name}</option>
                                   ))}
                             </select>
-                          </div>
-
+                          </div> */}{" "}
                           <div className="form-group col-md-12">
+                            {/* <label for="inputName"> Nama Batch</label>
+                            <input
+                              type="text"
+                              name="namaBatch"
+                              className="form-control"
+                              onChange={e => this.onChange(e)}
+                              required
+                            ></input> */}
+                            <div className="form-group col-md-12">
+                              <label for="inputCity">Parent </label>
+                              <select
+                                type="text"
+                                name="jenis"
+                                className="form-control"
+                                id="inputCity"
+                                onChange={e => this.onChange(e)}
+                                value={this.state.jenis}
+                              >
+                                <option selected>Choose</option>
+                                <option value="Parent 1">Parent 1</option>
+                                <option value="Parent 2 ">Parent2</option>
+                                <option value="Parent 3">Parent 3</option>
+                              </select>
+                            </div>
+                          </div>
+                          {/* <div className="form-group col-md-12">
                             <label for="inputCity">Id Jantan</label>
                             <select
                               type="text"
@@ -312,9 +337,19 @@ export default class Breeding extends Component {
                                     <option value={jan.name}>{jan.name}</option>
                                   ))}
                             </select>
-                          </div>
+                          </div> */}
+                          {/* <div className="form-group col-md-6">
+                            <label for="inputName">Status</label>
+                            <input
+                              type="text"
+                              name="statusBatch"
+                              className="form-control"
+                              onChange={e => this.onChange(e)}
+                              required
+                            ></input>
+                          </div> */}
                         </div>
-
+                        {/* 
                         <div className="form-group">
                           <label for="exampleFormControlTextarea1">
                             Deskripsi
@@ -327,7 +362,7 @@ export default class Breeding extends Component {
                             onChange={e => this.onChange(e)}
                             required
                           ></textarea>
-                        </div>
+                        </div> */}
 
                         <div className="modal-footer">
                           <button

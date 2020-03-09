@@ -39,7 +39,8 @@ export default class DetailKeuangan extends Component {
   };
   componentDidMount = async () => {
     this.setState({ isLoading: true });
-    await api.getAllReports().then(report => {
+    var query = window.location.search.substring(1);
+    await api.getReportsByIdMonth(query).then(report => {
       console.log(report);
       this.setState({
         file: report.data.data,
@@ -153,7 +154,7 @@ export default class DetailKeuangan extends Component {
     //registerburung(burungData);
   };
   render() {
-    const stat = ["Terjual", "Stok"];
+    const status = ["Pengeluaran", "Pemasukkan"];
     const { data } = this.state;
     const { file } = this.state;
     const { jumlah } = this.state;
@@ -183,7 +184,7 @@ export default class DetailKeuangan extends Component {
               Detail Keuangan digunakan untuk melihat laporan keuangan dan
               transaksi burung kenari.
             </p>
-            <button
+            {/* <button
               type="button"
               className="btn btn-success"
               data-toggle="modal"
@@ -200,7 +201,7 @@ export default class DetailKeuangan extends Component {
               >
                 Download Jurnal
               </button>
-            </span>
+            </span> */}
             <div
               className="modal fade bd-example-modal-lg"
               tabindex="-1"
@@ -321,10 +322,10 @@ export default class DetailKeuangan extends Component {
           </div>
         </div>
         <div className="container">
-          {/* <div className="form-row" style={{ justifyContent: "space-between" }}>
-            <div className="form-group col-md-3"> */}
-          {/* <label for="inputState">Laporan Penjualan Perbulan</label> */}
-          {/* <select
+          <div className="form-row" style={{ justifyContent: "space-between" }}>
+            <div className="form-group col-md-3">
+              {/* <label for="inputState">Laporan Penjualan Perbulan</label> */}
+              <select
                 type="text"
                 name="filter"
                 className="form-control"
@@ -342,15 +343,15 @@ export default class DetailKeuangan extends Component {
                 <option value="Juni">Juni</option>
                 <option value="Juli">July</option>
                 <option value="Agustus">Agustus</option>
-              </select> */}
-          {/* <button type="button" className="btn btn-success">
+              </select>
+              {/* <button type="button" className="btn btn-success">
                 Hitung Total Penjualan
               </button> */}
-          {/* </div> */}
+            </div>
 
-          {/* <div className="form-group col-md-3">
+            <div className="form-group col-md-3">
               {/* <label for="inputState"></label> */}
-          {/* <select
+              <select
                 type="text"
                 name="tahun"
                 className="form-control"
@@ -369,7 +370,7 @@ export default class DetailKeuangan extends Component {
               <h5 style={{}}>Total Penjualan Bulan {filter} Adalah</h5>
               <h5 style={{ fontWeight: "bold" }}>Rp.{jumlah},00</h5>
             </div>
-          </div> */}
+          </div>
           <div className="input-group ">
             <input
               type="text"
@@ -385,7 +386,7 @@ export default class DetailKeuangan extends Component {
           <table class="table">
             <thead>
               <tr>
-                <th scope="col"></th>
+                <th scope="col">Tanggal</th>
                 <th scope="col">Keterangan</th>
                 <th scope="col">Nominal</th>
                 <th scope="col">Jenis</th>
@@ -400,13 +401,27 @@ export default class DetailKeuangan extends Component {
                       (
                         <tr>
                           <td>
-                            {/* {" " + months[d.getMonth()] + " " + d.getFullYear()} */}
+                            {fil.day +
+                              " " +
+                              months[fil.month - 1] +
+                              " " +
+                              fil.year}
                           </td>
-                          <td>Penjualan Burung</td>
-                          <td>{fil.harga}</td>
-                          <td>Pemasukan</td>
+                          <td>{fil.keterangan}</td>
                           <td>
-                            {/* <button className="btn btn-success">Detail</button> */}
+                            {fil.out}
+                            {fil.in}
+                          </td>
+                          <td>{status[fil.status]}</td>
+                          <td>
+                            <Link
+                              to={"/lihatTrans?" + fil._id}
+                              className="card-link"
+                            >
+                              <button type="button" className="btn btn-warning">
+                                See More
+                              </button>
+                            </Link>
                           </td>
                         </tr>
                       )

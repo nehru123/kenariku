@@ -228,12 +228,7 @@ export default class DetailLog extends Component {
                       </button>
                     </div>
                     <div class="modal-body">
-                      <p>Are you Sure ?</p>
-                      Mas.. nanti kalo pas klik Add New Batch di muncul modal
-                      ini .. kalo yes nanti ada pesan eror jika ada batch yang
-                      belum selesai / alias on progres tp kalo dah udah finish
-                      jadi nanti bisa buat batch yang ke sekian(seumpama setelah
-                      batch 1 adalah batch 2)
+                      <p>Apakah ingin mengakhiri batch ?</p>
                     </div>
                     <div class="modal-footer">
                       <button
@@ -370,14 +365,14 @@ export default class DetailLog extends Component {
             </div> */}
             <h3>Batch 1</h3>
             <div className="Myrecord">
-              <p style={{ margin: 10 }}>Id Jantan :F-11</p>
-              <p style={{ margin: 10 }}>Id Betina :M-12</p>
+              <p style={{ margin: 10 }}>Id Jantan :F1-001</p>
+              <p style={{ margin: 10 }}>Id Betina :F1-006</p>
             </div>
 
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Status</th>
+                  <th scope="col">Type</th>
                   <th scope="col">Log</th>
                   <th scope="col"></th>
                   <th scope="col"></th>

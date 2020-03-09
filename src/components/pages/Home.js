@@ -29,9 +29,9 @@ const Wrapper = styled.div`
   }
 `;
 const Container = styled.div`
-  margin: 50px;
+  margin: 25px;
   .rounded-circle {
-    margin: 50px;
+    margin: 100px;
   }
 `;
 
@@ -214,9 +214,9 @@ export default class Home extends Component {
                       width="140"
                       height="140"
                     ></img>
-                    <h2 className="Title">
-                      {dat.jenis} ({stat[dat.status]})
-                    </h2>
+                    <h5 className="Title">
+                      {dat.name} {dat.jenis} ({stat[dat.status]})
+                    </h5>
 
                     <p>Berkualitas tinggi</p>
                     <p>{dat.umur} bulan</p>

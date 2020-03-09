@@ -41,6 +41,7 @@ export const loginuser = (userData, history) => dispatch => {
       history.push("/home");
     })
     .catch(err => {
+      window.alert("login gagal");
       console.log("====================================");
       console.log("Catch", err.response);
       console.log("====================================");

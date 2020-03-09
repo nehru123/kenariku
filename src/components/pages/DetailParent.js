@@ -409,11 +409,6 @@ export default class DetailParent extends Component {
                     </div>
                     <div class="modal-body">
                       <p>Are you Sure ?</p>
-                      Mas.. nanti kalo pas klik Add New Batch di muncul modal
-                      ini .. kalo yes nanti ada pesan eror jika ada batch yang
-                      belum selesai / alias on progres tp kalo dah udah finish
-                      jadi nanti bisa buat batch yang ke sekian(seumpama setelah
-                      batch 1 adalah batch 2)
                     </div>
                     <div class="modal-footer">
                       <button
@@ -433,8 +428,8 @@ export default class DetailParent extends Component {
             </div>
             <h3>Parent 1</h3>
             <div className="Myrecord">
-              <p style={{ margin: 10 }}>Id Jantan :F-11</p>
-              <p style={{ margin: 10 }}>Id Betina :M-12</p>
+              <p style={{ margin: 10 }}>Id Jantan :F-001</p>
+              <p style={{ margin: 10 }}>Id Betina :F-006</p>
             </div>
 
             {/* Table Bird */}
