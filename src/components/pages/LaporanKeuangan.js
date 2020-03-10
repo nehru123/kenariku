@@ -5,7 +5,8 @@ import api from "../utils/ServicesFinance";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-financial-management-banner-background-design-image_188731.jpg");
+    /* background-image: url("https://png.pngtree.com/thumb_back/fw800/back_our/20190621/ourmid/pngtree-financial-management-banner-background-design-image_188731.jpg"); */
+    background-image: url("https://static.vecteezy.com/system/resources/thumbnails/000/457/342/original/Finance_Flat_Design_In_Blue._Business_and_Finance_Illustration_in_Doodle_Style._Increasing_Income_and_Money_Management.jpg");
     background-size: cover;
   }
   .table {

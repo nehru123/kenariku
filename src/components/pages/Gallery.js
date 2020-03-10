@@ -5,10 +5,11 @@ import styled from "styled-components";
 import GaleryCards from "../layouts/GaleryCards";
 import { Howl } from "howler";
 import api from "../utils/ServicesGallery";
+import assets from "../assets/2.jpg";
 
 const Container = styled.nav`
   .jumbotron {
-    /* background-image: url("https://cityofcolumbiana.com/wp-content/uploads/media-gallery-banner.jpg"); */
+    background-image: url("2.jpg");
     background-size: cover;
   }
 `;

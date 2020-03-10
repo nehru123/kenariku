@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 import api from "../utils/ServicesBreeding";
+import assets from "../assets/d.jpg";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("https://i.pinimg.com/originals/6b/20/16/6b201623685e7093fe7df8970b1d26b5.jpg");
+    background-image: url("d.jpg");
     background-size: cover;
   }
   .table {
@@ -15,62 +16,6 @@ const Container = styled.nav`
     float: none;
   }
 
-  .card-counter {
-    box-shadow: 2px 2px 10px #dadada;
-    margin: 5px;
-    padding: 20px 10px;
-    background-color: #fff;
-    height: 100px;
-    border-radius: 5px;
-    transition: 0.3s linear all;
-  }
-
-  .card-counter:hover {
-    box-shadow: 4px 4px 20px #dadada;
-    transition: 0.3s linear all;
-  }
-
-  .card-counter.primary {
-    background-color: #007bff;
-    color: #fff;
-  }
-
-  .card-counter.danger {
-    background-color: #ef5350;
-    color: #fff;
-  }
-
-  .card-counter.success {
-    background-color: #66bb6a;
-    color: #fff;
-  }
-
-  .card-counter.info {
-    background-color: #26c6da;
-    color: #fff;
-  }
-
-  .card-counter i {
-    font-size: 5em;
-    opacity: 0.2;
-  }
-
-  .card-counter .count-numbers {
-    position: absolute;
-    right: 35px;
-    top: 20px;
-    font-size: 32px;
-    display: block;
-  }
-
-  .card-counter .count-name {
-    position: absolute;
-    right: 35px;
-    top: 65px;
-    font-style: italic;
-    text-transform: capitalize;
-    opacity: 0.5;
-  }
   .MyButton {
     text-align: right;
     margin: 15px;
@@ -242,10 +187,7 @@ export default class DetailParent extends Component {
       <Container>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1 style={{ textAlign: "center" }} className="display-4">
-              Detail Parent
-            </h1>
-            <p className="lead"></p>
+            <h1 style={{ textAlign: "center" }} className="display-12"></h1>
 
             <form id="addForm">
               <div
@@ -354,27 +296,7 @@ export default class DetailParent extends Component {
         </div>
         <div>
           <div className="container">
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Cari burung..."
-                aria-label=""
-                id="search"
-                onChange={i => this.searchBird(i)}
-                aria-describedby="basic-addon2"
-              ></input>
-            </div>
             <div className="MyButton">
-              {/* <button
-                type="button"
-                className="btn btn-success"
-                data-toggle="modal"
-                data-target=".bd-example-modal-lg"
-              >
-                Batch Baru
-              </button>
-            </div> */}
               <button
                 type="button"
                 class="btn btn-success"
@@ -383,49 +305,69 @@ export default class DetailParent extends Component {
               >
                 Add New Batch
               </button>
+            </div>
 
-              <div
-                class="modal fade"
-                id="exampleModalLong"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalLongTitle"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">
-                        Warning
-                      </h5>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p>Are you Sure ?</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button
-                        type="button"
-                        class="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        No
-                      </button>
-                      <button type="button" class="btn btn-primary">
-                        Yes
-                      </button>
-                    </div>
+            <div
+              class="modal fade"
+              id="exampleModalLong"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalLongTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      New Batch
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div className="form-row">
+                        <div className="form-group col-md-12">
+                          <label for="inputCity">Nama Batch</label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="namaBatch"
+                            name="batch"
+                            onChange={e => this.onChange(e)}
+                            // value="#"
+                          ></input>
+                        </div>
+                      </div>
+
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-success"
+                          onClick={e => this.addReportIn(e)}
+                        >
+                          Tambahkan
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
+
             <h3>Parent 1</h3>
             <div className="Myrecord">
               <p style={{ margin: 10 }}>Id Jantan :F-001</p>

@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import api from "../utils/ServicesReport";
+import assets from "../assets/report.jpg";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("https://www.lockpath.com/wp-content/uploads/2018/01/iStock-613679762.jpg");
-    background-size: cover;
+    background-image: url("report.jpg");
   }
   .table {
     border-radius: 5px;
@@ -37,7 +37,7 @@ export default class Report extends Component {
     data: [],
     file: [],
     idUp: "",
-    id: 0,
+    id: 0
   };
   componentDidMount = async () => {
     await api.getAllReports().then(report => {
@@ -388,7 +388,6 @@ export default class Report extends Component {
                             <td>{fil.log}</td>
                             <td>{fil.pakan}</td>
                             <td>{fil.status}</td>
-                            
                           </tr>
                         )
                       )

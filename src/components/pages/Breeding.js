@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 import api from "../utils/ServicesBreeding";
-
+import assets from "../assets/4.jpg";
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("https://i.pinimg.com/originals/6b/20/16/6b201623685e7093fe7df8970b1d26b5.jpg");
+    /* background-image: url("https://png.pngtree.com/thumb_back/fw800/back_pic/05/13/44/28599f906947b87.jpg"); */
+    background-image: url("4.jpg");
     background-size: cover;
   }
   .table {
@@ -234,8 +235,13 @@ export default class Breeding extends Component {
       <Container>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1 className="display-4">Breeding Record</h1>
-            <p className="lead">
+            <h1
+              style={{ color: "black", textAlign: "center" }}
+              className="display-4"
+            >
+              Breeding Record
+            </h1>
+            <p style={{ color: "black", textAlign: "center" }} className="lead">
               Breeding digunakan untuk memonitoring proses ternak burung kenari.
             </p>
             {/* <button
