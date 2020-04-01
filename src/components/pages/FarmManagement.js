@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 import api from '../utils/ServicesBurung';
+import assets from "../assets/f.PNG";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("https://i.pinimg.com/originals/6b/20/16/6b201623685e7093fe7df8970b1d26b5.jpg");
+    /* background-image: url("https://i.pinimg.com/originals/6b/20/16/6b201623685e7093fe7df8970b1d26b5.jpg"); */
+    background-image: url("f.PNG");
     background-size: cover;
   }
   .table {
@@ -278,7 +280,7 @@ export default class FarmManagement extends Component {
       <Container>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <h1 className="display-4">Farm Management</h1>
+            <p style={{fontFamily:"Roboto"}} className="display-4">Farm Management</p>
             <p className="lead">
               Farm management digunakan untuk melihat dan menambahkan data
               burung kenari.
@@ -628,7 +630,7 @@ export default class FarmManagement extends Component {
         </div>
         <div>
           <div className="container">
-          <div class="row" style={{justifyContent:"center"}}>
+          {/* <div class="row" style={{justifyContent:"center"}}>
     <div class="col-md-3">
       <div class="card-counter primary">
         <i class="fa fa-code-fork"></i>
@@ -653,9 +655,8 @@ export default class FarmManagement extends Component {
         <span class="count-name">Jumlah Semua Burung</span>
       </div>
       </div>
-      </div>
-            <h2>List Burung Kenari</h2>
-           
+      </div> */}
+            {/* <p>List Burung Kenari</p> */}
             <div className="input-group mb-3">
               <input
                 type="text"
@@ -663,6 +664,8 @@ export default class FarmManagement extends Component {
                 placeholder="Cari burung..."
                 aria-label=""
                 id="search"
+               
+                
                 onChange={i => this.searchBird(i)}
                 aria-describedby="basic-addon2"
               ></input>

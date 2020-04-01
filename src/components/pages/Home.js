@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import api from "../utils/ServicesBurung";
+import assets from "../assets/h.PNG";
 
 const Wrapper = styled.div`
   max-width: 100%;
@@ -16,10 +17,11 @@ const Wrapper = styled.div`
   }
   .jumbotron {
     height: 400px;
-    background-image: url("https://cdn.pixabay.com/photo/2017/01/31/07/06/banner-2023093__340.jpg");
-    display: flex;
-    justify-content: center;
+    /* background-image: url("https://cdn.pixabay.com/photo/2017/01/31/07/06/banner-2023093__340.jpg"); */
+
     background-size: cover;
+    background-image: url("h.PNG");
+    background-repeat: no-repeat;
   }
   .container {
     margin-top: 50px;
@@ -74,130 +76,24 @@ export default class Home extends Component {
       <Wrapper>
         <section className="jumbotron text-center">
           <div className="container">
-            <h1
+            <p
               className="jumbotron-heading"
-              style={{ fontFamily: "Montserrat" }}
+              style={{ fontFamily: "Roboto", fontSize: 30 }}
             >
-              Farm
-            </h1>
-            <p className="lead text-muted" style={{ fontFamily: "Montserrat" }}>
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don't simply skip over it entirely.
+              Purnama Farm
+            </p>
+            <p className="lead text-muted" style={{ fontFamily: "Roboto" }}>
+              Panjaitan Gang 17a Malang Kota
             </p>
 
-            <button
+            {/* <button
               type="button"
               class="btn btn-primary"
               data-toggle="modal"
               data-target=".bd-example-modal-lg"
             >
               Get Started
-            </button>
-            <div
-              class="modal fade bd-example-modal-lg"
-              tabindex="-1"
-              role="dialog"
-              aria-labelledby="myLargeModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                  <div
-                    id="carouselExampleCaptions"
-                    class="carousel slide"
-                    data-ride="carousel"
-                  >
-                    <ol class="carousel-indicators">
-                      <li
-                        data-target="#carouselExampleCaptions"
-                        data-slide-to="0"
-                        class="active"
-                      ></li>
-                      <li
-                        data-target="#carouselExampleCaptions"
-                        data-slide-to="1"
-                      ></li>
-                      <li
-                        data-target="#carouselExampleCaptions"
-                        data-slide-to="2"
-                      ></li>
-                    </ol>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img
-                          src="https://img.charteo.com/icons_03-001-01_076_xl.png"
-                          class="d-block w-100"
-                          alt="..."
-                        />
-
-                        <div class="carousel-caption d-none d-md-block">
-                          {/* <h5 style={{ color: "grey" }}>First slide label</h5> */}
-
-                          {/* <p style={{ color: "black", margin: 300 }}>
-                            Nulla vitae elit libero, a pharetra augue mollis
-                            interdum.
-                          </p> */}
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img
-                          src="https://img.charteo.com/icons_03-001-01_076_xl.png"
-                          class="d-block w-100"
-                          alt="..."
-                        />
-
-                        <div class="carousel-caption d-none d-md-block">
-                          {/* <h5>Second slide label</h5> */}
-                          {/* <p style={{ color: "black" }}>
-                            Nulla vitae elit libero, a pharetra augue mollis
-                            interdum.
-                          </p> */}
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <img
-                          src="https://img.charteo.com/icons_03-001-01_076_xl.png"
-                          class="d-block w-100"
-                          alt="..."
-                        />
-                        <div class="carousel-caption d-none d-md-block">
-                          {/* <h5>Third slide label</h5> */}
-                          {/* <p style={{ color: "black" }}>
-                            Nulla vitae elit libero, a pharetra augue mollis
-                            interdum.
-                          </p> */}
-                        </div>
-                      </div>
-                    </div>
-                    <a
-                      class="carousel-control-prev"
-                      href="#carouselExampleCaptions"
-                      role="button"
-                      data-slide="prev"
-                    >
-                      <span
-                        class="carousel-control-prev-icon"
-                        aria-hidden="true"
-                      ></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a
-                      class="carousel-control-next"
-                      href="#carouselExampleCaptions"
-                      role="button"
-                      data-slide="next"
-                    >
-                      <span
-                        class="carousel-control-next-icon"
-                        aria-hidden="true"
-                      ></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </button> */}
           </div>
         </section>
 

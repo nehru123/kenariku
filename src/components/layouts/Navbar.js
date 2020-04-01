@@ -6,10 +6,51 @@ import Home from "../pages/Home";
 import { logout } from "../../actions/authActions";
 
 const Container = styled.nav`
-  .navbar navbar-expand-sm bg-primary navbar-dark {
+  /* .navbar navbar-expand-sm bg-primary navbar-dark {
     box-shadow: 5px 0px 18px #888888;
 
     border-radius: 15px;
+  
+  } */
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    float: left;
+  }
+  .navbar-inner {
+    display: inline;
+  }
+  li a {
+    color: orange;
+  }
+
+  .navbar.transparent.navbar-inverse .navbar-inner {
+    display: inline;
+    border-width: 0px;
+    -webkit-box-shadow: 0px 0px;
+    box-shadow: 0px 0px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: -webkit-gradient(
+      linear,
+      50% 0%,
+      50% 100%,
+      color-stop(0%, rgba(0, 0, 0, 0)),
+      color-stop(100%, rgba(0, 0, 0, 0))
+    );
+    background-image: -webkit-linear-gradient(
+      270deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    background-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 `;
 
@@ -50,26 +91,27 @@ class Navbar extends React.Component {
   render() {
     return (
       <Container>
-        <nav className="navbar navbar-expand-sm bg-primary navbar-dark">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link className="navbar-brand" to="/">
-              <img
-                src="https://lh3.googleusercontent.com/-G4dTDlDvbMc/WLv2jGYHvNI/AAAAAAAAAGk/-zzM2Ysv2FI/s640/67.png"
-                width="50px"
-              ></img>
-            </Link>
-            <ul className="navbar-nav ml-auto mt-10 mt-lg-0">
+        <nav className="navbar transparent navbar-inverse">
+          <div className="navbar-inner">
+            {/* <button
+              className="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarTogglerDemo01"
+              aria-controls="navbarTogglerDemo01"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button> */}
+            {/* <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+              <Link className="navbar-brand" to="/">
+                <img
+                  src="https://lh3.googleusercontent.com/-G4dTDlDvbMc/WLv2jGYHvNI/AAAAAAAAAGk/-zzM2Ysv2FI/s640/67.png"
+                  width="50px"
+                ></img>
+              </Link> */}
+            <ul>
               {this.props.auth.isAuthenticated ? (
                 <React.Fragment>
                   <li className="nav-item">
@@ -112,7 +154,10 @@ class Navbar extends React.Component {
                   <li className="nav-item">
                     <button
                       className="btn"
-                      style={{ backgroundColor: "transparent", color: "white" }}
+                      style={{
+                        backgroundColor: "transparent",
+                        color: "white"
+                      }}
                     >
                       <i
                         className="fa fa-sign-out  "
@@ -137,6 +182,7 @@ class Navbar extends React.Component {
                 </React.Fragment>
               )}
             </ul>
+            {/* </div> */}
           </div>
         </nav>
       </Container>

@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import api from "../utils/ServicesReport";
-import assets from "../assets/report.jpg";
+import assets from "../assets/r.PNG";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("report.jpg");
+    background-image: url("r.PNG");
+    background-size: cover;
   }
   .table {
     border-radius: 5px;
@@ -201,7 +202,7 @@ export default class Report extends Component {
               {" "}
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn "
                 onClick={e => this.print(e)}
               >
                 Download Log

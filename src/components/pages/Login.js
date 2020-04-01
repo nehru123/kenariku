@@ -14,29 +14,31 @@ const mapStateToProps = state => ({
 const Container = styled.nav`
   min-height: 100vh;
   overflow-y: hidden;
-  .title {
-    margin-top: 100px;
-    text-align: center;
-    background-color: #007bff;
-    padding: 10px;
 
-    color: white;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #faca09;
 
-    border-top-right-radius: 15px;
-    border-top-left-radius: 15px;
-  }
-  .cover {
-    padding: 1rem 2rem;
-    height: 330px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-  }
-  .bigCover {
+  .Kotak {
     margin: auto;
-    width: 35%;
-    box-shadow: 5px 0px 18px #888888;
-    size: 1000vh;
-    border-radius: 15px;
+    margin-top: 150px;
+    width: 368px;
+    height: 420px;
+    border-radius: 40px;
+    box-shadow: 8px 15px 25px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+  }
+  .KotakSatu {
+  }
+  .KotakDua {
+  }
+  .Wrapper {
+    margin: 40px;
+    padding-top: 100px;
+  }
+  .btn-login {
+    border-radius: 12px;
+    box-shadow: 5px 10px 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #feb200;
   }
 `;
 
@@ -78,52 +80,81 @@ class Login extends Component {
   render() {
     return (
       <Container>
-        <div className="bigCover">
-          <div className="title">
-            <h4>Login</h4>
-          </div>
-          <div className="cover">
-            <form onSubmit={e => this.onSubmit(e)}>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input
-                  type="email"
-                  name="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  onChange={e => this.onChange(e)}
-                  value={this.state.email}
-                />
+        <div className="Kotak">
+          <form onSubmit={e => this.onSubmit(e)}>
+            <div className="Wrapper">
+              <div className="KotakSatu">
+                <div class="form-group">
+                  {/* <label for="exampleInputEmail1">Email address</label> */}
+                  <input
+                    style={{
+                      backgroundColor: "#f2eded",
+                      borderWidth: 0,
+                      border: "none",
+                      borderRadius: 15,
+                      height: 45,
+                      fontSize: 13
+                    }}
+                    type="email"
+                    name="email"
+                    placeholder="  email address"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    onChange={e => this.onChange(e)}
+                    value={this.state.email}
+                  />
+                </div>
               </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  onChange={e => this.onChange(e)}
-                  value={this.state.password}
-                />
+              <div className="KotakDua">
+                <div class="form-group">
+                  {/* <label for="exampleInputPassword1">Password</label> */}
+                  <input
+                    style={{
+                      backgroundColor: "#f2eded",
+                      borderWidth: 0,
+                      border: "none",
+                      borderRadius: 15,
+                      height: 45,
+                      fontSize: 13
+                    }}
+                    type="password"
+                    placeholder="  password"
+                    name="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    onChange={e => this.onChange(e)}
+                    value={this.state.password}
+                  />
+                </div>
               </div>
-              <button
-                type="submit"
-                class="btn btn-primary"
-                style={{ width: "100%" }}
-              >
-                Login
-              </button>
-              <p style={{ textAlign: "center", marginTop: 50 }}>
-                Belum Daftar ?{" "}
-                <span>
-                  <Link to="/Register" className="card-link">
-                    <a className="GoesTo">Daftar Disini</a>
-                  </Link>
-                </span>
-              </p>
-            </form>
-          </div>
+            </div>
+            <button
+              style={{}}
+              type="submit"
+              class="btn-login"
+              style={{
+                textAlign: "center",
+                margin: "auto",
+                display: "flex",
+                justifyContent: "center",
+                width: 110,
+                height: 35,
+                borderWidth: 0,
+                border: "none"
+              }}
+            >
+              Login
+            </button>
+            <p style={{ textAlign: "center", marginTop: 50 }}>
+              Belum Daftar ?{" "}
+              <span>
+                <Link to="/Register" className="card-link">
+                  <a className="GoesTo">Daftar Disini</a>
+                </Link>
+              </span>
+            </p>
+          </form>
         </div>
       </Container>
     );

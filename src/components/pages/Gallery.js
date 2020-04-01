@@ -5,11 +5,11 @@ import styled from "styled-components";
 import GaleryCards from "../layouts/GaleryCards";
 import { Howl } from "howler";
 import api from "../utils/ServicesGallery";
-import assets from "../assets/2.jpg";
+import assets from "../assets/g.PNG";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("2.jpg");
+    background-image: url("g.PNG");
     background-size: cover;
   }
 `;

@@ -13,30 +13,16 @@ const Container = styled.nav`
     background-size: cover;
   }
   .row {
-    display: -ms-flexbox; /* IE10 */
     display: flex;
-    -ms-flex-wrap: wrap; /* IE10 */
     flex-wrap: wrap;
     padding: 0 4px;
   }
-
-  /* Create four equal columns that sits next to each other */
-  .column {
-    -ms-flex: 25%; /* IE10 */
-    flex: 25%;
-    max-width: 25%;
-    padding: 0 4px;
-  }
-
-  .column img {
-    margin-top: 8px;
-    vertical-align: middle;
+  img {
     width: 100%;
   }
-
   /* Responsive layout - makes a two column-layout instead of four columns */
   @media screen and (max-width: 800px) {
-    .column {
+    .col-md-4 {
       -ms-flex: 50%;
       flex: 50%;
       max-width: 50%;
@@ -45,7 +31,7 @@ const Container = styled.nav`
 
   /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
   @media screen and (max-width: 600px) {
-    .column {
+    .col-md-4 {
       -ms-flex: 100%;
       flex: 100%;
       max-width: 100%;
@@ -174,54 +160,86 @@ export default class Koleksi extends Component {
           </div>
         </section>
 
-        <section>
-          <h3 style={{ textAlign: "center", margin: 30 }}>Videos</h3>
-          <div className="videoCover"></div>
-        </section>
-        <h3 style={{ textAlign: "center", margin: 30 }}>Album </h3>
-        <div
-          class="row"
-          style={{ margin: "auto", width: "100%", justifyContent: "center" }}
-        >
-          <div class="column">
-            <img
-              src="https://www.nhm.ac.uk/content/dam/nhmwww/discover/common-tailorbirds/Common-tailorbird-full-width.jpg.thumb.1920.1920.png"
-              style={{ width: "100%" }}
-            />
-            <img
-              src="https://www.hbw.com/sites/default/files/styles/ibc_1k/public/ibc/p/common_tailorbird_bocos.jpg?itok=xM5iOtMR"
-              style={{ width: "100%" }}
-            />
-            <img
-              src="https://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/newseventsimage_1557320321101_mainnews2012_x1.jpg"
-              style={{ width: "100%" }}
-            />
-          </div>
-          <div class="column">
-            <img
-              src="https://scx1.b-cdn.net/csz/news/800/2019/mostnativebi.jpg"
-              style={{ width: "100%" }}
-            />
+        <h3 style={{ margin: 30 }}>Album </h3>
 
-            <img
-              src="https://ontariospca.ca/wp-content/uploads/2019/03/Living-with-wildlife-birds-544x600.jpg"
-              style={{ width: "100%" }}
-            />
-          </div>
-          <div class="column">
-            <img
-              src="https://media.phillyvoice.com/media/images/bird-in-spinach.2e16d0ba.fill-735x490.jpg"
-              style={{ width: "100%" }}
-            />
-            <img
-              src="https://www.nhm.ac.uk/content/dam/nhmwww/discover/common-tailorbirds/Common-tailorbird-full-width.jpg.thumb.1920.1920.png"
-              style={{ width: "100%" }}
-            />
-            <img
-              src="https://img.jakpost.net/c/2019/12/20/2019_12_20_83809_1576815251._large.jpg"
-              style={{ width: "100%" }}
-            />
-          </div>
+        <div style={{ margin: 20 }} class="row">
+          <figure class="col-md-4">
+            <a
+              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
+              data-size="1600x1067"
+            >
+              <img
+                alt="picture"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
+                class="img-fluid"
+              />
+            </a>
+          </figure>
+          <figure class="col-md-4">
+            <a
+              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
+              data-size="1600x1067"
+            >
+              <img
+                alt="picture"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg"
+                class="img-fluid"
+              />
+            </a>
+          </figure>
+          <figure class="col-md-4">
+            <a
+              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
+              data-size="1600x1067"
+            >
+              <img
+                alt="picture"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
+                class="img-fluid"
+              />
+            </a>
+          </figure>
+        </div>
+
+        <h3 style={{ margin: 30 }}>Event </h3>
+
+        <div style={{ margin: 20 }} class="row">
+          <figure class="col-md-4">
+            <a
+              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
+              data-size="1600x1067"
+            >
+              <img
+                alt="picture"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
+                class="img-fluid"
+              />
+            </a>
+          </figure>
+          <figure class="col-md-4">
+            <a
+              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
+              data-size="1600x1067"
+            >
+              <img
+                alt="picture"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg"
+                class="img-fluid"
+              />
+            </a>
+          </figure>
+          <figure class="col-md-4">
+            <a
+              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
+              data-size="1600x1067"
+            >
+              <img
+                alt="picture"
+                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
+                class="img-fluid"
+              />
+            </a>
+          </figure>
         </div>
       </Container>
     );
