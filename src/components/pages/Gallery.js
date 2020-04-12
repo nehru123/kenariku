@@ -1,48 +1,38 @@
 import React, { Component } from "react";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import styled from "styled-components";
 import GaleryCards from "../layouts/GaleryCards";
 import { Howl } from "howler";
 import api from "../utils/ServicesGallery";
-import assets from "../assets/g.PNG";
+import assets from "../assets/gal.PNG";
 
 const Container = styled.nav`
   .jumbotron {
-    background-image: url("g.PNG");
+    background-image: url("gal.PNG");
+    background-size: cover;
+  }
+  .Mycard {
+    box-shadow: 10px 0px 18px #888888;
+  }
+  .Wrapper {
+    background-image: url("back.PNG");
     background-size: cover;
   }
 `;
 
 export default class Gallery extends Component {
   state = {
-    path: "http://localhost:5000/img/",
-    name: "",
-    namaBurung: "",
-    deskripsi: "",
-    jenisUp: "",
-    warnaUp: "",
-    jenis_kelaminUp: "",
-    umurUp: "",
-    hargaUp: "",
-    status: "",
+    path: "http://localhost:5000/",
     judul: "",
-    foto: "",
-    jenis: "",
-    warna: "",
-    jenis_kelamin: "",
-    umur: "",
-    harga: "",
+    deskripsi: "",
+    audio: "",
+    gambar: "",
     data: [],
-    file: [],
     idUp: "",
     id: 0,
-    _id: "",
-    message: null,
-    intervalIsSet: false,
-    idToDelete: null,
-    idToUpdate: null,
-    objectToUpdate: null
+    _id: ""
   };
   // when component mounts, first thing it does is fetch all existing data in our db
   // then we incorporate a polling logic so that we can easily see if our db has
@@ -52,14 +42,7 @@ export default class Gallery extends Component {
     await api.getAllGallery().then(galleries => {
       console.log(galleries);
       this.setState({
-        file: galleries.data.data,
-        isLoading: false
-      });
-    });
-    await api.getAllBirds().then(bird => {
-      console.log(bird);
-      this.setState({
-        data: bird.data.data,
+        data: galleries.data.data,
         isLoading: false
       });
     });
@@ -77,7 +60,7 @@ export default class Gallery extends Component {
   }
 
   getDataFromDb = () => {
-    api.getAllBirds().then(bird => {
+    api.getAllGallery().then(bird => {
       this.setState({
         data: bird.data.data
       });
@@ -114,18 +97,25 @@ export default class Gallery extends Component {
 
   add = async e => {
     e.preventDefault();
+    if (
+      this.state.judul &&
+      this.state.deskripsi &&
+      this.state.audio &&
+      this.state.gambar
+    ) {
+      const payload = {
+        judul: this.state.judul,
+        deskripsi: this.state.deskripsi,
+        audio: this.state.audio,
+        gambar: this.state.gambar
+      };
 
-    const payload = {
-      namaBurung: this.state.namaBurung,
-      judul: this.state.judul,
-      deskripsi: this.state.deskripsi,
-      foto: this.state.foto
-    };
+      await api.insertGallery(payload).then(res => {
+        window.alert(`Collection successfully`);
+        this.getDataFromDb();
+      });
+    } else window.alert(`Mohon isi form dengan lengkap`);
 
-    await api.insertGallery(payload).then(res => {
-      window.alert(`Collection successfully`);
-      this.getDataFromDb();
-    });
     //registerburung(burungData);
   };
 
@@ -141,9 +131,28 @@ export default class Gallery extends Component {
     var image = document.getElementById(target.name).files[0];
     var formdata = new FormData();
     formdata.append("files", image, image.name);
-    await api.upload(formdata).then(res => {
+    await api.uploadImg(formdata).then(res => {
       if (res.data.success) {
         window.alert("Gambar " + target.name + " berhasil di upload");
+        this.setState({
+          [target.name]: res.data.data
+        });
+      } else {
+        window.alert(res.data.data);
+      }
+    });
+  };
+  preview = async ({ target }) => {
+    var output = document.getElementById("output" + target.id);
+    output.src = URL.createObjectURL(target.files[0]);
+  };
+  uploadAudio = async ({ target }) => {
+    var audio = document.getElementById(target.name).files[0];
+    var formdata = new FormData();
+    formdata.append("files", audio, audio.name);
+    await api.uploadAudio(formdata).then(res => {
+      if (res.data.success) {
+        window.alert("Audio " + target.name + " berhasil di upload");
         this.setState({
           [target.name]: res.data.data
         });
@@ -155,7 +164,6 @@ export default class Gallery extends Component {
 
   render() {
     const { data } = this.state;
-    const { file } = this.state;
     return (
       <Container>
         <div className="jumbotron jumbotron-fluid">
@@ -169,19 +177,19 @@ export default class Gallery extends Component {
               type="button"
               className="btn btn-success"
               data-toggle="modal"
-              data-target=".bd-example-modal-lg"
+              data-target=".bd-example-modal-lg-galeri"
             >
               Tambah Gallery
             </button>
 
             <div
-              className="modal fade bd-example-modal-lg"
+              className="modal fade bd-example-modal-lg-galeri"
               tabindex="-1"
               role="dialog"
               aria-labelledby="myLargeModalLabel"
               aria-hidden="true"
             >
-              <div className="modal-dialog modal-lg" role="document">
+              <div className="modal-dialog modal-lg-galeri" role="document">
                 <div className="modal-content" closeModal={this.closeModal}>
                   <div className="modal-header">
                     <h5 className="modal-title" id="exampleModalLabel">
@@ -199,26 +207,7 @@ export default class Gallery extends Component {
                   <div className="modal-body">
                     <form>
                       <div className="form-row">
-                        <div className="form-group col-md-6">
-                          <label for="inputName">Burung</label>
-                          <select
-                            type="text"
-                            name="namaBurung"
-                            className="form-control"
-                            id="inputState"
-                            onChange={e => this.onChange(e)}
-                            value={this.state.namaBurung}
-                          >
-                            <option selected>Choose</option>
-                            {data.length <= 0
-                              ? "NO DB ENTRIES YET"
-                              : data.map(dat => (
-                                  <option value={dat._id}>{dat.name}</option>
-                                ))}
-                          </select>
-                        </div>
-
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                           <label for="inputCity">Judul</label>
                           <input
                             type="text"
@@ -243,34 +232,41 @@ export default class Gallery extends Component {
                           name="deskripsi"
                           onChange={e => this.onChange(e)}
                           value={this.state.deskripsi}
-                          // onChange={e => this.onChange(e)}
                           required
                         ></textarea>
                       </div>
 
                       <div className="form-row">
-                        <div class="custom-file mb-3">
-                          <input
-                            type="file"
-                            class="custom-file-input"
-                            id="customFile"
-                            name="filename"
-                          />
-                          <label class="custom-file-label" for="customFile">
-                            Choose audio file
-                          </label>
+                        <div className="form-group col-md-6">
+                          <div class="custom-file mb-3">
+                            <input type="file" id="audio" />
+                            <div class="form-group">
+                              <button
+                                type="button"
+                                name="audio"
+                                class="btn btn-primary"
+                                onClick={e => this.uploadAudio(e)}
+                              >
+                                Upload audio
+                              </button>
+                            </div>
+                          </div>
                         </div>
                         <div className="form-group col-md-3">
-                          <label for="inputCity">Gambar Burung</label>
-                          <input type="file" id="foto" />
+                          <input
+                            type="file"
+                            id="gambar"
+                            onChange={e => this.preview(e)}
+                          />
+                          <img id="outputgambar" width="100px" height="100px" />
                           <div class="form-group">
                             <button
                               type="button"
-                              name="foto"
+                              name="gambar"
                               class="btn btn-primary"
                               onClick={e => this.uploadImage(e)}
                             >
-                              Upload
+                              Upload gambar
                             </button>
                           </div>
                         </div>
@@ -301,31 +297,131 @@ export default class Gallery extends Component {
           </div>
         </div>
 
-        <div>
-          <div class="album py-5 bg-light">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i2.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Border.jpg?w=600&ssl=1"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i0.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Yorkshire.jpg?w=600&ssl=1"
-                  />
-                </div>
-                <div class="col-md-4">
-                  <GaleryCards
-                    desc="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-                    picture="https://i1.wp.com/www.hewan.id/wp-content/uploads/2017/04/Jenis-Kenari-Norwich.jpg?w=600&ssl=1"
-                  />
-                </div>
-              </div>
+        <div className="Wrapper">
+          <div style={{}} class="album py-5 ">
+            {/* <div class="container"> */}
+            <div style={{ padding: 50 }} class="row">
+              {data.length <= 0
+                ? "NO DB ENTRIES YET"
+                : data.map(dat => (
+                    <div class="col-md-4">
+                      <div
+                        style={{
+                          borderRadius: 50,
+                          margin: 50,
+                          // padding: 5,
+                          backgroundColor: "#f2f2f2"
+                        }}
+                        class="Mycard"
+                      >
+                        <img
+                          style={{
+                            borderTopLeftRadius: 50,
+                            borderTopRightRadius: 50,
+                            borderBottomRightRadius: 89
+                          }}
+                          src={this.state.path + "img/" + dat.gambar}
+                          class="bd-placeholder-img card-img-top"
+                          width="100%"
+                          height="225"
+                        />
+
+                        <div class="card-body">
+                          <p style={{ fontFamily: "Roboto", fontSize: 20 }}>
+                            {dat.judul}
+                          </p>
+                          <p class="card-text">{dat.deskripsi}</p>
+                          <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                              <Link to={"/Koleksi?" + dat.judul}>
+                                <button
+                                  type="button"
+                                  class="btn btn-sm btn-outline-secondary"
+                                >
+                                  View
+                                </button>
+                              </Link>
+                              <button
+                                type="button"
+                                class="btn btn-sm btn-outline-secondary"
+                                name="idUp"
+                                onClick={e =>
+                                  this.setState({
+                                    idUp: dat._id
+                                  })
+                                }
+                                onClick={e => this.deleteData(e)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            style={{ marginTop: 15 }}
+                            class="d-flex justify-content-between align-items-center"
+                          >
+                            <audio controls>
+                              <source
+                                src={this.state.path + "audio/" + dat.audio}
+                                type="audio/mpeg"
+                              ></source>
+                              Listen
+                            </audio>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              {/* <div class="album py-6">
+            <div
+              style={{ display: "flex", justifyContent: "center" }}
+              class="row"
+            >
+              {data.length <= 0
+                ? "NO DB ENTRIES YET"
+                : data.map(dat => (
+                    <div
+                      style={{
+                        margin: 40
+                      }}
+                      class="card mb-4 shadow-sm"
+                    >
+                      <Link to={"/Koleksi?" + dat.judul}>
+                        <img
+                          style={{
+                            width: 340,
+                            height: 398,
+                            objectFit: "copver"
+
+                          }}
+                          class="bd-placeholder-img card-img-top"
+                          src={this.state.path + "img/" + dat.gambar}
+                        ></img>
+                      </Link>
+                      <div style={{}} class="card-body">
+                        <p style={{ fontFamily: "Roboto", fontSize: 20 }}>
+                          {dat.judul}
+                        </p>
+                        <p class="card-text">{dat.deskripsi}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <audio controls>
+                              <source
+                                src={this.state.path + "audio/" + dat.audio}
+                                type="audio/mpeg"
+                              ></source>
+                              Listen
+                            </audio>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+            </div>
+          </div> */}
             </div>
           </div>
+          {/* </div> */}
         </div>
       </Container>
     );

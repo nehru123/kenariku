@@ -62,8 +62,8 @@ class App extends React.Component {
         <Provider store={store}>
           <Router>
             <Navbar />
-            <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Login} />
+            <Route exact path="/login" component={Login} />
             <Route exact path="/Register" component={Register} />
             <Switch>
               <PrivateRoute exact path="/Home" component={Home} />

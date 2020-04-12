@@ -18,10 +18,10 @@ const Wrapper = styled.div`
   .jumbotron {
     height: 400px;
     /* background-image: url("https://cdn.pixabay.com/photo/2017/01/31/07/06/banner-2023093__340.jpg"); */
-
-    background-size: cover;
     background-image: url("h.PNG");
-    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    background-size: cover;
   }
   .container {
     margin-top: 50px;
@@ -76,15 +76,17 @@ export default class Home extends Component {
       <Wrapper>
         <section className="jumbotron text-center">
           <div className="container">
-            <p
+            {/* <h1
               className="jumbotron-heading"
-              style={{ fontFamily: "Roboto", fontSize: 30 }}
+              style={{ fontFamily: "Montserrat" }}
             >
-              Purnama Farm
-            </p>
-            <p className="lead text-muted" style={{ fontFamily: "Roboto" }}>
-              Panjaitan Gang 17a Malang Kota
-            </p>
+              Farm
+            </h1>
+            <p className="lead text-muted" style={{ fontFamily: "Montserrat" }}>
+              Something short and leading about the collection below—its
+              contents, the creator, etc. Make it short and sweet, but not too
+              short so folks don't simply skip over it entirely.
+            </p> */}
 
             {/* <button
               type="button"

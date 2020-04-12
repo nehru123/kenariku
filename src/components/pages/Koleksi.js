@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { withRouter, Link } from "react-router-dom";
+import api from "../utils/ServicesImage";
 
 const Container = styled.nav`
   margin-bottom: 100px;
@@ -12,52 +14,97 @@ const Container = styled.nav`
   .jumbotron {
     background-size: cover;
   }
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 4px;
-  }
-  img {
-    width: 100%;
-  }
-  /* Responsive layout - makes a two column-layout instead of four columns */
-  @media screen and (max-width: 800px) {
-    .col-md-4 {
-      -ms-flex: 50%;
-      flex: 50%;
-      max-width: 50%;
-    }
-  }
-
-  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-  @media screen and (max-width: 600px) {
-    .col-md-4 {
-      -ms-flex: 100%;
-      flex: 100%;
-      max-width: 100%;
-    }
-  }
-  .videoCover {
-    box-shadow: 5px 0px 18px #888888;
-    border-radius: 100px;
-    border-radius: 15px;
-    size: 100vh;
-    width: 800px;
-    height: 360px;
-    background-color: grey;
-    margin: auto;
+  .card mb-4 shadow-sm {
+    box-shadow: 8px 15px 25px 0 rgba(0, 0, 0, 0.16);
   }
 `;
 
 export default class Koleksi extends Component {
   state = {
-    files: []
+    path: "http://localhost:5000/img/",
+    judul: window.location.search.substring(1),
+    data: []
   };
 
+  componentDidMount = async () => {
+    this.setState({ isLoading: true });
+    var query = window.location.search.substring(1);
+    await api.getImage(query).then(image => {
+      this.setState({
+        data: image.data.data
+      });
+    });
+  };
+
+  componentWillUnmount() {
+    if (this.state.intervalIsSet) {
+      clearInterval(this.state.intervalIsSet);
+      this.setState({ intervalIsSet: null });
+    }
+  }
+
+  getDataFromDb = () => {
+    var query = window.location.search.substring(1);
+    api.getImage(query).then(image => {
+      this.setState({
+        data: image.data.data
+      });
+    });
+  };
+
+  onChange({ target }) {
+    this.setState({
+      [target.name]: target.value
+    });
+  }
+
+  add = async e => {
+    e.preventDefault();
+    if (this.state.image) {
+      const payload = {
+        judul: this.state.judul,
+        image: this.state.image
+      };
+
+      await api.insertImage(payload).then(res => {
+        window.alert(`Collection successfully`);
+        this.getDataFromDb();
+      });
+    } else window.alert(`Tambahkan gambar`);
+  };
+
+  deleteData = async () => {
+    await api.deleteGById(this.state.idUp).then(res => {
+      window.alert(`Bird deleted successfully`);
+      this.getDataFromDb();
+    });
+    //registerburung(burungData);
+  };
+
+  uploadImage = async ({ target }) => {
+    var image = document.getElementById(target.name).files[0];
+    var formdata = new FormData();
+    formdata.append("files", image, image.name);
+    await api.uploadImg(formdata).then(res => {
+      if (res.data.success) {
+        window.alert("Gambar " + target.name + " berhasil di upload");
+        this.setState({
+          [target.name]: res.data.data
+        });
+      } else {
+        window.alert(res.data.data);
+      }
+    });
+  };
+  preview = async ({ target }) => {
+    var output = document.getElementById("output" + target.id);
+    output.src = URL.createObjectURL(target.files[0]);
+  };
   fileSelectedHandler = e => {
     this.setState({ files: [...this.state.files, ...e.target.files] });
   };
   render() {
+    const { data } = this.state;
     return (
       <Container>
         <section class="jumbotron text-center">
@@ -107,50 +154,41 @@ export default class Koleksi extends Component {
                       >
                         <div className="form-group col-md-3">
                           <label for="inputCity">Gambar Burung</label>
-                          <input type="file" id="foto" />
-                          <span>
+                          <input
+                            type="file"
+                            id="image"
+                            onChange={e => this.preview(e)}
+                          />
+                          <img id="outputimage" width="100px" height="100px" />
+                          <div class="form-group">
                             <button
                               type="button"
-                              name="foto"
+                              name="image"
                               class="btn btn-primary"
                               onClick={e => this.uploadImage(e)}
                             >
                               Upload
                             </button>
-                          </span>
+                          </div>
                         </div>
-                        <div className="form-group col-md-3">
-                          <label for="inputCity">Video Burung</label>
-                          <input type="file" id="foto" />
-                          <span>
-                            <button
-                              type="button"
-                              name="foto"
-                              class="btn btn-primary"
-                              onClick={e => this.uploadImage(e)}
-                            >
-                              Upload
-                            </button>
-                          </span>
-                        </div>
-                      </div>
 
-                      <div className="modal-footer">
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button
-                          type="submit"
-                          data-dismiss="modal"
-                          className="btn btn-success"
-                          onClick={e => this.add(e)}
-                        >
-                          Tambahkan
-                        </button>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button
+                            type="submit"
+                            data-dismiss="modal"
+                            className="btn btn-success"
+                            onClick={e => this.add(e)}
+                          >
+                            Tambahkan
+                          </button>
+                        </div>
                       </div>
                     </form>
                   </div>
@@ -160,86 +198,31 @@ export default class Koleksi extends Component {
           </div>
         </section>
 
-        <h3 style={{ margin: 30 }}>Album </h3>
+        <h3 style={{ textAlign: "center", margin: 30 }}>Album </h3>
 
-        <div style={{ margin: 20 }} class="row">
-          <figure class="col-md-4">
-            <a
-              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
-              data-size="1600x1067"
-            >
-              <img
-                alt="picture"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
-                class="img-fluid"
-              />
-            </a>
-          </figure>
-          <figure class="col-md-4">
-            <a
-              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
-              data-size="1600x1067"
-            >
-              <img
-                alt="picture"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg"
-                class="img-fluid"
-              />
-            </a>
-          </figure>
-          <figure class="col-md-4">
-            <a
-              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
-              data-size="1600x1067"
-            >
-              <img
-                alt="picture"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
-                class="img-fluid"
-              />
-            </a>
-          </figure>
-        </div>
-
-        <h3 style={{ margin: 30 }}>Event </h3>
-
-        <div style={{ margin: 20 }} class="row">
-          <figure class="col-md-4">
-            <a
-              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
-              data-size="1600x1067"
-            >
-              <img
-                alt="picture"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
-                class="img-fluid"
-              />
-            </a>
-          </figure>
-          <figure class="col-md-4">
-            <a
-              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
-              data-size="1600x1067"
-            >
-              <img
-                alt="picture"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg"
-                class="img-fluid"
-              />
-            </a>
-          </figure>
-          <figure class="col-md-4">
-            <a
-              href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg"
-              data-size="1600x1067"
-            >
-              <img
-                alt="picture"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
-                class="img-fluid"
-              />
-            </a>
-          </figure>
+        <div class="album py-5 ">
+          <div class="container">
+            <div class="row">
+              {data.length <= 0
+                ? "NO DB ENTRIES YET"
+                : data.map(dat => (
+                    <div class="col-md-4">
+                      <div
+                        style={{ borderRadius: 30 }}
+                        class="card mb-4 shadow-sm"
+                      >
+                        <img
+                          style={{ borderRadius: 30 }}
+                          class="bd-placeholder-img card-img-top"
+                          width="100%"
+                          height="225"
+                          src={this.state.path + dat.image}
+                        />
+                      </div>
+                    </div>
+                  ))}
+            </div>
+          </div>
         </div>
       </Container>
     );

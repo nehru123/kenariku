@@ -45,64 +45,54 @@ export default class LihatBurung extends Component {
 
   componentDidMount = async () => {
     var query = window.location.search.substring(1);
-    await api.getReportsById(query).then(bird => {
-      console.log(bird);
+    await api.getReportsById(query).then(report => {
       this.setState({
-        data: bird.data.data
-      });
-    });
-    await api.getBirdById(this.state.data.idBird).then(bird => {
-      console.log(bird);
-      this.setState({
-        bird: bird.data.data
+        data: report.data.data
       });
     });
   };
   render() {
     const { data } = this.state;
-    const stat = ["Terjual", "Stok"];
+    const stat = ["Pengeluaran", "Pemasukkan"];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    var d = new Date(data.tanggal);
     return (
       <Container>
         <div classNameName="wrapper">
           <div className="card mb-10">
-            <div className="row no-gutters">
-              <div style={{ marginLeft: 60 }} className="col-md-5">
-                <div className="item">
-                  <Carousel showStatus={false} showThumbs={false} width="400px">
-                    <div>
-                      <img src={this.state.path + data.image1} />
-                    </div>
-                    <div>
-                      <img src={this.state.path + data.image2} />
-                    </div>
-                    <div>
-                      <img src={this.state.path + data.image3} />
-                    </div>
-                  </Carousel>
-                </div>
-              </div>
-              <div className="col-md-5">
-                <div className="card-body">
-                  <h1 className="card-title">
-                    {data.name} {stat[data.status]}
-                  </h1>
+            <div className="col-md-5">
+              <div className="card-body">
+                <h1 className="card-title">{stat[data.status]}</h1>
 
-                  <hr></hr>
-                  <p className="card-text">{data.deskripsi}</p>
-                  <p>Jenis :{data.jenis}</p>
-                  <hr></hr>
-                  <p>Umur : {data.umur}</p>
-                  <hr></hr>
-                  <p>Warna : {data.warna}</p>
-                  <hr></hr>
-                  <p>Jenis kelamin : {data.jenis_kelamin}</p>
-                  <hr></hr>
-                  <p className="card-text">
-                    <small className="text-muted">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
+                <hr></hr>
+                <p className="card-text">
+                  {data.name}{" "}
+                  {d.getDate() +
+                    " " +
+                    months[d.getMonth()] +
+                    " " +
+                    d.getFullYear()}
+                </p>
+                <p>Pembeli : {data.pembeli}</p>
+                <p>Keterangan : {data.keterangan}</p>
+                <hr></hr>
+                <p>
+                  Nominal : {data.in}
+                  {data.out}
+                </p>
               </div>
             </div>
           </div>

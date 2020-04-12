@@ -95,16 +95,6 @@ export default class Breeding extends Component {
         data: breed.data.data
       });
     });
-    await api.getBetina().then(birdF => {
-      this.setState({
-        betina: birdF.data.data
-      });
-    });
-    await api.getJantan().then(birdM => {
-      this.setState({
-        jantan: birdM.data.data
-      });
-    });
   };
   componentWillUnmount() {
     if (this.state.intervalIsSet) {
@@ -186,13 +176,11 @@ export default class Breeding extends Component {
       betina: this.state.idbetina,
       jantan: this.state.idjantan,
       imagebetina: imageb.image1,
-      imagejantan: imagej.image1,
-      deskripsi: this.state.deskripsi
+      imagejantan: imagej.image1
     };
     if (
       payload.betina &&
       payload.jantan &&
-      payload.deskripsi &&
       payload.imagebetina &&
       payload.imagejantan
     ) {
@@ -200,8 +188,7 @@ export default class Breeding extends Component {
         window.alert(`Breeding inserted successfully`);
         this.setState({
           idbetina: "",
-          idjantan: "",
-          deskripsi: ""
+          idjantan: ""
         });
       });
       api.updateBirdById(imageb._id).then(res => {});
@@ -230,6 +217,7 @@ export default class Breeding extends Component {
     const { data } = this.state;
     const { betina } = this.state;
     const { jantan } = this.state;
+    var count = 1;
 
     return (
       <Container>
@@ -429,7 +417,7 @@ export default class Breeding extends Component {
                       <tr>
                         <td>
                           {" "}
-                          <h5>Parent 1</h5>
+                          <h5>Parent {count++}</h5>
                         </td>
                         <td>
                           <img

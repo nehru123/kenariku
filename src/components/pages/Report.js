@@ -202,7 +202,7 @@ export default class Report extends Component {
               {" "}
               <button
                 type="button"
-                className="btn "
+                className="btn btn-primary"
                 onClick={e => this.print(e)}
               >
                 Download Log

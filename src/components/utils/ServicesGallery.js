@@ -3,24 +3,22 @@ import axios from "axios";
 const api = axios.create({
   baseURL: "http://localhost:5000/api/gallery"
 });
-const apimg = axios.create({
+const apiup = axios.create({
   baseURL: "http://localhost:5000"
 });
 
 export const insertGallery = payload => api.post(`/add`, payload);
-export const getAllBirds = () => api.get(`/getburung`);
-export const getAllGallery = () => api.get(`/getgallery`);
+export const getAllGallery = () => api.get(`/getGallery`);
 export const deleteGById = id => api.delete(`/delete/${id}`);
-export const getBirdById = id => api.get(`/find/${id}`);
-export const upload = payload => apimg.post(`/upload`, payload);
+export const uploadImg = payload => apiup.post(`/upload`, payload);
+export const uploadAudio = payload => apiup.post(`/uploadau`, payload);
 
 const apis = {
-  insertGallery,
-  getAllBirds,
-  getAllGallery,
-  deleteGById,
-  getBirdById,
-  upload
+ 	insertGallery,
+	getAllGallery,
+	deleteGById,
+	uploadImg,
+	uploadAudio
 };
 
 export default apis;
